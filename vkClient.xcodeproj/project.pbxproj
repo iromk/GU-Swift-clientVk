@@ -11,7 +11,7 @@
 		9C05C9741FAB4CEF00737566 /* OtherGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C05C9731FAB4CEF00737566 /* OtherGroupsTableViewController.swift */; };
 		9C05C9761FAB534000737566 /* UserGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C05C9751FAB534000737566 /* UserGroupsTableViewCell.swift */; };
 		9C05C9781FAB598700737566 /* OtherGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C05C9771FAB598700737566 /* OtherGroupsTableViewCell.swift */; };
-		9C0B14C41FAACE2600E2BC59 /* UserStoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B14C31FAACE2600E2BC59 /* UserStoryTableController.swift */; };
+		9C0B14C41FAACE2600E2BC59 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0B14C31FAACE2600E2BC59 /* FriendsTableViewController.swift */; };
 		9C0B14DC1FAB0D3D00E2BC59 /* images-3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9C0B14D11FAB0D3C00E2BC59 /* images-3.jpeg */; };
 		9C0B14DD1FAB0D3D00E2BC59 /* images-5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9C0B14D21FAB0D3C00E2BC59 /* images-5.jpeg */; };
 		9C0B14DE1FAB0D3D00E2BC59 /* images-0.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9C0B14D31FAB0D3C00E2BC59 /* images-0.jpeg */; };
@@ -44,7 +44,7 @@
 		9C05C9731FAB4CEF00737566 /* OtherGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherGroupsTableViewController.swift; sourceTree = "<group>"; };
 		9C05C9751FAB534000737566 /* UserGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		9C05C9771FAB598700737566 /* OtherGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherGroupsTableViewCell.swift; sourceTree = "<group>"; };
-		9C0B14C31FAACE2600E2BC59 /* UserStoryTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStoryTableController.swift; sourceTree = "<group>"; };
+		9C0B14C31FAACE2600E2BC59 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		9C0B14D11FAB0D3C00E2BC59 /* images-3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-3.jpeg"; sourceTree = "<group>"; };
 		9C0B14D21FAB0D3C00E2BC59 /* images-5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-5.jpeg"; sourceTree = "<group>"; };
 		9C0B14D31FAB0D3C00E2BC59 /* images-0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-0.jpeg"; sourceTree = "<group>"; };
@@ -124,6 +124,9 @@
 		9C3C87D91FAEE7A400F824EA /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				9C0B14EB1FAB22FC00E2BC59 /* FriendDetailedCell.swift */,
+				9C0B14E91FAB152B00E2BC59 /* FriendViewController.swift */,
+				9C0B14C31FAACE2600E2BC59 /* FriendsTableViewController.swift */,
 				9C3C87DA1FAEE7D800F824EA /* FriendsTableViewCell.swift */,
 			);
 			name = Friends;
@@ -157,15 +160,12 @@
 				9C508DEA1FA1980E00B83E2D /* AppDelegate.swift */,
 				9C508DEC1FA1980E00B83E2D /* LoginController.swift */,
 				9CE759C51FAA428C00E9F11E /* AppMainController.swift */,
-				9C508DEE1FA1980E00B83E2D /* Main.storyboard */,
-				9C0B14EB1FAB22FC00E2BC59 /* FriendDetailedCell.swift */,
-				9C0B14E91FAB152B00E2BC59 /* FriendViewController.swift */,
-				9C0B14C31FAACE2600E2BC59 /* UserStoryTableController.swift */,
-				9C508DF11FA1980E00B83E2D /* Assets.xcassets */,
-				9C508DF31FA1980E00B83E2D /* LaunchScreen.storyboard */,
-				9C508DF61FA1980E00B83E2D /* Info.plist */,
 				9C508DFC1FA1C51300B83E2D /* Auth.swift */,
 				9C508DFE1FA1C91500B83E2D /* UserSession.swift */,
+				9C508DEE1FA1980E00B83E2D /* Main.storyboard */,
+				9C508DF31FA1980E00B83E2D /* LaunchScreen.storyboard */,
+				9C508DF11FA1980E00B83E2D /* Assets.xcassets */,
+				9C508DF61FA1980E00B83E2D /* Info.plist */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -335,7 +335,7 @@
 				9C05C9781FAB598700737566 /* OtherGroupsTableViewCell.swift in Sources */,
 				9CE759C61FAA428C00E9F11E /* AppMainController.swift in Sources */,
 				9C05C9761FAB534000737566 /* UserGroupsTableViewCell.swift in Sources */,
-				9C0B14C41FAACE2600E2BC59 /* UserStoryTableController.swift in Sources */,
+				9C0B14C41FAACE2600E2BC59 /* FriendsTableViewController.swift in Sources */,
 				9C05C9721FAB4ACC00737566 /* UserGroupsTableViewController.swift in Sources */,
 				9C0B14EC1FAB22FC00E2BC59 /* FriendDetailedCell.swift in Sources */,
 			);

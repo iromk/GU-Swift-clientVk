@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserStoryTableController: UITableViewController {
+class FriendsTableViewController: UITableViewController {
 
     let SegueFriendDetails = "FriendDetails"
     

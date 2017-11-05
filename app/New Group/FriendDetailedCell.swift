@@ -11,6 +11,7 @@ import UIKit
 class FriendDetailedCell: UICollectionViewCell {
     
 
-    @IBOutlet weak var friendPicture: UIImageView!
+    
+    @IBOutlet weak var image: UIImageView!
     
 }

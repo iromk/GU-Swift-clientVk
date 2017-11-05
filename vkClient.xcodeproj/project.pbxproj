@@ -59,7 +59,7 @@
 		9C0B14EB1FAB22FC00E2BC59 /* FriendDetailedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailedCell.swift; sourceTree = "<group>"; };
 		9C3C87D71FAE437300F824EA /* images-8.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "images-8.jpeg"; sourceTree = "<group>"; };
 		9C3C87DA1FAEE7D800F824EA /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
-		9C508DE71FA1980E00B83E2D /* Homework01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homework01.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C508DE71FA1980E00B83E2D /* vkClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C508DEA1FA1980E00B83E2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C508DEC1FA1980E00B83E2D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9C508DEF1FA1980E00B83E2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		9C508DDE1FA1980E00B83E2D = {
 			isa = PBXGroup;
 			children = (
-				9C508DE91FA1980E00B83E2D /* Homework01 */,
+				9C508DE91FA1980E00B83E2D /* app */,
 				9C508DE81FA1980E00B83E2D /* Products */,
 				9390AE12E6BC610D7226517C /* Pods */,
 				D59CAA2C1E114F25763A5959 /* Frameworks */,
@@ -144,12 +144,12 @@
 		9C508DE81FA1980E00B83E2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9C508DE71FA1980E00B83E2D /* Homework01.app */,
+				9C508DE71FA1980E00B83E2D /* vkClient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9C508DE91FA1980E00B83E2D /* Homework01 */ = {
+		9C508DE91FA1980E00B83E2D /* app */ = {
 			isa = PBXGroup;
 			children = (
 				9C3C87D91FAEE7A400F824EA /* Friends */,
@@ -168,7 +168,7 @@
 				9C508DFC1FA1C51300B83E2D /* Auth.swift */,
 				9C508DFE1FA1C91500B83E2D /* UserSession.swift */,
 			);
-			path = Homework01;
+			path = app;
 			sourceTree = "<group>";
 		};
 		D59CAA2C1E114F25763A5959 /* Frameworks */ = {
@@ -182,9 +182,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9C508DE61FA1980E00B83E2D /* Homework01 */ = {
+		9C508DE61FA1980E00B83E2D /* vkClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9C508DF91FA1980E00B83E2D /* Build configuration list for PBXNativeTarget "Homework01" */;
+			buildConfigurationList = 9C508DF91FA1980E00B83E2D /* Build configuration list for PBXNativeTarget "vkClient" */;
 			buildPhases = (
 				82705654769FC1E905323D24 /* [CP] Check Pods Manifest.lock */,
 				9C508DE31FA1980E00B83E2D /* Sources */,
@@ -197,9 +197,9 @@
 			);
 			dependencies = (
 			);
-			name = Homework01;
+			name = vkClient;
 			productName = Homework01;
-			productReference = 9C508DE71FA1980E00B83E2D /* Homework01.app */;
+			productReference = 9C508DE71FA1980E00B83E2D /* vkClient.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -218,7 +218,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9C508DE21FA1980E00B83E2D /* Build configuration list for PBXProject "Homework01" */;
+			buildConfigurationList = 9C508DE21FA1980E00B83E2D /* Build configuration list for PBXProject "vkClient" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -231,7 +231,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9C508DE61FA1980E00B83E2D /* Homework01 */,
+				9C508DE61FA1980E00B83E2D /* vkClient */,
 			);
 		};
 /* End PBXProject section */
@@ -477,9 +477,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7R2E432SL;
-				INFOPLIST_FILE = Homework01/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = home.Homework01;
+				PRODUCT_BUNDLE_IDENTIFIER = home.vkClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,9 +493,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7R2E432SL;
-				INFOPLIST_FILE = Homework01/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = home.Homework01;
+				PRODUCT_BUNDLE_IDENTIFIER = home.vkClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -505,7 +505,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9C508DE21FA1980E00B83E2D /* Build configuration list for PBXProject "Homework01" */ = {
+		9C508DE21FA1980E00B83E2D /* Build configuration list for PBXProject "vkClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C508DF71FA1980E00B83E2D /* Debug */,
@@ -514,7 +514,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9C508DF91FA1980E00B83E2D /* Build configuration list for PBXNativeTarget "Homework01" */ = {
+		9C508DF91FA1980E00B83E2D /* Build configuration list for PBXNativeTarget "vkClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C508DFA1FA1980E00B83E2D /* Debug */,

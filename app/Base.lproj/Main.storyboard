@@ -12,7 +12,7 @@
         <!--Login Controller-->
         <scene sceneID="Hnb-Jx-SbV">
             <objects>
-                <viewController id="g6O-ZT-jDd" customClass="LoginController" customModule="Homework01" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="g6O-ZT-jDd" customClass="LoginController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NiO-RU-RHT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,14 +53,26 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMH-Tm-6Ln">
-                                        <rect key="frame" x="162.66666666666666" y="60" width="89" height="21"/>
+                                        <rect key="frame" x="163" y="60" width="89" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="\/|{" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGV-8g-XWT">
+                                        <rect key="frame" x="185" y="13" width="45" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="ADh-sK-Rqc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="shadowOffset" width="-1" height="1"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="kGV-8g-XWT" firstAttribute="centerX" secondItem="ZhA-b1-33s" secondAttribute="centerX" id="0ty-ts-uTl"/>
                                     <constraint firstItem="KUO-bA-dUi" firstAttribute="top" secondItem="xrm-Wu-puL" secondAttribute="bottom" constant="21" id="1hB-07-dU2"/>
                                     <constraint firstItem="xrm-Wu-puL" firstAttribute="leading" secondItem="Nis-Kq-o9g" secondAttribute="leading" id="5ME-N3-7bW"/>
                                     <constraint firstItem="xrm-Wu-puL" firstAttribute="top" secondItem="ZhA-b1-33s" secondAttribute="top" constant="89" id="6Mk-wG-X03"/>
@@ -74,6 +86,7 @@
                                     <constraint firstItem="xrm-Wu-puL" firstAttribute="top" secondItem="MMH-Tm-6Ln" secondAttribute="bottom" constant="8" symbolic="YES" id="oaJ-9h-DBJ"/>
                                     <constraint firstItem="DAm-HU-hmP" firstAttribute="top" secondItem="Nis-Kq-o9g" secondAttribute="bottom" constant="24" id="qsx-Dn-OCd"/>
                                     <constraint firstItem="Nis-Kq-o9g" firstAttribute="top" secondItem="KUO-bA-dUi" secondAttribute="bottom" constant="8" symbolic="YES" id="wzC-e3-JQU"/>
+                                    <constraint firstItem="MMH-Tm-6Ln" firstAttribute="top" secondItem="kGV-8g-XWT" secondAttribute="bottom" constant="14" id="xSJ-mU-Ikn"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -98,7 +111,7 @@
         <!--App Main Controller-->
         <scene sceneID="X9L-jG-SgY">
             <objects>
-                <tabBarController id="eTa-Ka-p08" customClass="AppMainController" customModule="Homework01" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="eTa-Ka-p08" customClass="AppMainController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VRK-Rz-knW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -133,13 +146,13 @@
         <!--Something-->
         <scene sceneID="4m9-tP-vMf">
             <objects>
-                <tableViewController id="GEN-3h-YKZ" customClass="UserGroupsTableViewController" customModule="Homework01" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="GEN-3h-YKZ" customClass="UserGroupsTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LU0-M7-FwB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserGroups" rowHeight="80" id="rjC-3v-2Yz" customClass="UserGroupsTableViewCell" customModule="Homework01" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserGroups" rowHeight="80" id="rjC-3v-2Yz" customClass="UserGroupsTableViewCell" customModule="vkClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rjC-3v-2Yz" id="6Ax-wM-LL1">
@@ -191,7 +204,7 @@
         <!--Other Groups Table View Controller-->
         <scene sceneID="I60-Z4-xKf">
             <objects>
-                <tableViewController id="YdE-PW-mci" customClass="OtherGroupsTableViewController" customModule="Homework01" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YdE-PW-mci" customClass="OtherGroupsTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ifb-zT-v5m">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,7 +217,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherGroups" id="48o-sD-O1W" customClass="OtherGroupsTableViewCell" customModule="Homework01" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherGroups" id="48o-sD-O1W" customClass="OtherGroupsTableViewCell" customModule="vkClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="58" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="48o-sD-O1W" id="nIk-8f-bc7">
@@ -267,13 +280,13 @@
         <!--User story-->
         <scene sceneID="aSi-JB-bdh">
             <objects>
-                <tableViewController id="a1b-a7-RGn" customClass="UserStoryTableController" customModule="Homework01" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="a1b-a7-RGn" customClass="UserStoryTableController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QAE-fZ-Id0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserFriends" rowHeight="59" id="UdY-HE-E2c" customClass="FriendsTableViewCell" customModule="Homework01" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserFriends" rowHeight="59" id="UdY-HE-E2c" customClass="FriendsTableViewCell" customModule="vkClient" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="59"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UdY-HE-E2c" id="pDl-l9-BTY">
@@ -316,7 +329,7 @@
         <!--Friend View Controller-->
         <scene sceneID="Kg2-VL-7Ov">
             <objects>
-                <collectionViewController id="XS0-zM-Gg2" customClass="FriendViewController" customModule="Homework01" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="XS0-zM-Gg2" customClass="FriendViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="UoU-xP-mLp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +341,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendCell" id="hHr-ff-whd" customClass="FriendDetailedCell" customModule="Homework01" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendCell" id="hHr-ff-whd" customClass="FriendDetailedCell" customModule="vkClient" customModuleProvider="target">
                                 <rect key="frame" x="8.6666666666666661" y="0.0" width="397" height="385"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

@@ -34,6 +34,10 @@
 		9C508DFD1FA1C51300B83E2D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C508DFC1FA1C51300B83E2D /* Auth.swift */; };
 		9C508DFF1FA1C91500B83E2D /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C508DFE1FA1C91500B83E2D /* UserSession.swift */; };
 		9C8476EA1FAF658E00CCCCD6 /* VkApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8476E91FAF658E00CCCCD6 /* VkApiProvider.swift */; };
+		9C9EAE741FB05DAF00A9AF65 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE731FB05DAF00A9AF65 /* User.swift */; };
+		9C9EAE761FB05DB900A9AF65 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE751FB05DB900A9AF65 /* Friend.swift */; };
+		9C9EAE781FB05DC500A9AF65 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE771FB05DC500A9AF65 /* Group.swift */; };
+		9C9EAE7A1FB05DE100A9AF65 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE791FB05DE100A9AF65 /* Picture.swift */; };
 		C490DAF7E293D5317D188976 /* Pods_vkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D7835000629F420576C0D0 /* Pods_vkClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +73,10 @@
 		9C508DFC1FA1C51300B83E2D /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		9C508DFE1FA1C91500B83E2D /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		9C8476E91FAF658E00CCCCD6 /* VkApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkApiProvider.swift; sourceTree = "<group>"; };
+		9C9EAE731FB05DAF00A9AF65 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9C9EAE751FB05DB900A9AF65 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		9C9EAE771FB05DC500A9AF65 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		9C9EAE791FB05DE100A9AF65 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
 		B3D7835000629F420576C0D0 /* Pods_vkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -154,6 +162,7 @@
 		9C508DE91FA1980E00B83E2D /* app */ = {
 			isa = PBXGroup;
 			children = (
+				9C9EAE721FB05D9D00A9AF65 /* Entities */,
 				9C8476E81FAF20E100CCCCD6 /* Session */,
 				9C3C87D91FAEE7A400F824EA /* Friends */,
 				9C05C9701FAB4A7800737566 /* Groups */,
@@ -176,6 +185,17 @@
 				9C508DFE1FA1C91500B83E2D /* UserSession.swift */,
 			);
 			path = Session;
+			sourceTree = "<group>";
+		};
+		9C9EAE721FB05D9D00A9AF65 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				9C9EAE731FB05DAF00A9AF65 /* User.swift */,
+				9C9EAE751FB05DB900A9AF65 /* Friend.swift */,
+				9C9EAE771FB05DC500A9AF65 /* Group.swift */,
+				9C9EAE791FB05DE100A9AF65 /* Picture.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		DE08CE9F574875CB83D58734 /* Pods */ = {
@@ -336,14 +356,18 @@
 				9C05C9741FAB4CEF00737566 /* OtherGroupsTableViewController.swift in Sources */,
 				9C508DED1FA1980E00B83E2D /* LoginController.swift in Sources */,
 				9C0B14EA1FAB152B00E2BC59 /* FriendViewController.swift in Sources */,
+				9C9EAE781FB05DC500A9AF65 /* Group.swift in Sources */,
 				9C508DEB1FA1980E00B83E2D /* AppDelegate.swift in Sources */,
 				9C3C87DB1FAEE7D800F824EA /* FriendsTableViewCell.swift in Sources */,
 				9C508DFF1FA1C91500B83E2D /* UserSession.swift in Sources */,
+				9C9EAE741FB05DAF00A9AF65 /* User.swift in Sources */,
 				9C508DFD1FA1C51300B83E2D /* Auth.swift in Sources */,
 				9C05C9781FAB598700737566 /* OtherGroupsTableViewCell.swift in Sources */,
 				9C05C9761FAB534000737566 /* UserGroupsTableViewCell.swift in Sources */,
+				9C9EAE7A1FB05DE100A9AF65 /* Picture.swift in Sources */,
 				9C8476EA1FAF658E00CCCCD6 /* VkApiProvider.swift in Sources */,
 				9C0B14C41FAACE2600E2BC59 /* FriendsTableViewController.swift in Sources */,
+				9C9EAE761FB05DB900A9AF65 /* Friend.swift in Sources */,
 				9C05C9721FAB4ACC00737566 /* UserGroupsTableViewController.swift in Sources */,
 				9C0B14EC1FAB22FC00E2BC59 /* FriendDetailedCell.swift in Sources */,
 			);

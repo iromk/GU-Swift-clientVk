@@ -35,7 +35,7 @@ class VkApiProvider {
     }
     
     func getUserName() -> (String?, String?) {
-        return (firstName ?? "User", lastName ?? "Name")
+        return (firstName , lastName )
     }
     
     func requestFriendsGet() {

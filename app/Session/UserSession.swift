@@ -16,17 +16,27 @@ class UserSession {
     
     static var thisSession: UserSession?
     
-    var user: Auth.ArrayProvider.Account?
+    var userx: Auth.ArrayProvider.Account?
     
     var vk: VkApiProvider?
     let testUid = "292290347"
-    var firstName: String? { get { return getFirstName() }}
-    var lastName: String? { get { return getLastName() }}
-   
-    var state: State { get { return user == nil ? .closed : .opened } }
+    
+    var userObject: User?
+    
+    var user: User { get {
+                guard let _ = userObject!.lastName else {
+                    var name: (String?, String?) = vk!.getUserName() 
+                    userObject?.firstName = name.0
+                    userObject?.lastName = name.1
+                    return userObject!
+                }
+                return userObject!
+        } }
+    
+    var state: State { get { return userObject == nil ? .closed : .opened } }
     
     init() {
-        user = nil
+        userObject = nil
     }
     
     static func getInstance() -> UserSession {
@@ -42,7 +52,7 @@ class UserSession {
 
     func authorize(with token: String) {
         vk = VkApiProvider(uid: testUid, with: token)
-        vk!.getUserName()
+        userObject = User(name: vk!.getUserName() )
         vk!.requestFriendsGet()
     }
     
@@ -58,10 +68,10 @@ class UserSession {
 
     func authorize(login: String, password: String) -> Bool {
         if let result = Auth.ArrayProvider.check(login, with: password) {
-            user = result
+            userx = result
             return true
         }
-        user = nil
+        userObject = nil
         return false
     }
     

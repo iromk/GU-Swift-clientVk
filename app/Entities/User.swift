@@ -13,9 +13,11 @@ class User {
     var firstName: String?
     var lastName: String?
     
-    var friends = [String: Friend]()
-    var groups: [Group]?
-    var ava: Picture?
+//    var friends = [String: Friend]()
+    var friends = [Friend]()
+    
+    var groups = [Group]()
+    var ava =  Picture()
 
     convenience init(name: (String?, String?)) {
         self.init(firstName: name.0, lastName: name.1)

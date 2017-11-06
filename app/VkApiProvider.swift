@@ -82,7 +82,10 @@ class VkApiProvider {
                     parameters: params)
                 .responseData
                     { response in
-                        self.onResponseUsersGet(response) }
+                        self.onResponseUsersGet(response)
+                        
+                    }
+        
     }
     
     func onResponseFriendsGet(_ response: DataResponse<Data>) {

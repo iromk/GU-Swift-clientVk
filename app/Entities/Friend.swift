@@ -11,12 +11,14 @@ import Foundation
 class Friend {
     
     var firstName: String?
-    var LastName: String?
-//    var uid: String?
+    var lastName: String?
+    var uid: String?
+    var fullName: String { get { return "\(firstName ?? "John") \(lastName ?? "Doe")" } }
     
-    init(_ firstName: String, _ lastName: String ) {
+    init(_ uid: String, _ firstName: String, _ lastName: String ) {
         self.firstName = firstName
-        self.LastName = lastName
+        self.lastName = lastName
+        self.uid = uid
     }
     
     

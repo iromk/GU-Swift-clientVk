@@ -62,9 +62,11 @@ class UserSession {
         for (_, friend):(String,JSON) in friends {
 //            print(friend["id"])
 //            print(friend["last_name"])
-            self.user.friends[friend["id"].stringValue] = Friend(friend["first_name"].stringValue,           friend["last_name"].stringValue)
+            self.user.friends.append(Friend(friend["id"].stringValue,
+                                            friend["first_name"].stringValue,
+                                            friend["last_name"].stringValue))
         }
-//        print("friends parsed:\n\(self.user.friends)")
+        print("friends parsed:\n\(self.user.friends.count)")
     }
     
     func getFirstName() -> String {

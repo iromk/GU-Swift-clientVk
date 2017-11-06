@@ -56,7 +56,7 @@ class FriendViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return 42
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -64,13 +64,9 @@ class FriendViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FriendDetailedCell
     
         // Configure the cell
-        //let imageView = cell.viewWithTag(1) as! UIImageView
-        //imageView.image = image
         print("*** in collection view")
         cell.image.image = UIImage(named: "images-\(arc4random_uniform(10))")
-//        friendPicture.image = image
         title = "\(name ?? "friend")'s images"
-//        labelFriendImages.text = "\(String(describing: name)) images"
 
         return cell
     }

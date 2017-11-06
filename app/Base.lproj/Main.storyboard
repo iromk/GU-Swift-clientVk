@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="527.536231884058" y="58.695652173913047"/>
         </scene>
-        <!--App Main Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="X9L-jG-SgY">
             <objects>
-                <tabBarController id="eTa-Ka-p08" customClass="AppMainController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="eTa-Ka-p08" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VRK-Rz-knW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -318,8 +318,8 @@
                             <outlet property="delegate" destination="a1b-a7-RGn" id="vuK-TP-9aL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="User story" id="sEE-C5-28o">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="pEc-G0-Pvz" userLabel="Friends"/>
+                    <navigationItem key="navigationItem" title="Friends" id="sEE-C5-28o" userLabel="Friends">
+                        <barButtonItem key="backBarButtonItem" title="Friends" id="pEc-G0-Pvz" userLabel="Friends"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZg-f1-tSy" userLabel="First Responder" sceneMemberID="firstResponder"/>

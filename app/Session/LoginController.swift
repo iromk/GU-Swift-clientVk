@@ -26,6 +26,10 @@ class LoginController: UIViewController {
     }
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let vkdata = VKDataProvider()
+        
+        vkdata.listFriends()
+        
         if (inputLogin.text?.isEmpty)! && (inputPassword.text?.isEmpty)! {
             userSession.authorize(login: "morpheus", password: "1")
             return true

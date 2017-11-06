@@ -42,7 +42,7 @@ class VkApiProvider {
     func requestUsersGet(uids: String?) {
         print("token3: [\(token)]")
         var params: Parameters = [
-            "uid": uid,
+            "user_id": uid!,
             "access_token": token!,
             "v": "5.68"
         ]

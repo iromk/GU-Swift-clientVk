@@ -108,7 +108,6 @@ extension LoginController: WKNavigationDelegate {
         }
         
         let token = params["access_token"]
-        print("token: [\(token)]")
         userSession.authorize(with: token!)
         
         decisionHandler(.cancel)

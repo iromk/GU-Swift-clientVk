@@ -41,10 +41,9 @@ class UserSession {
     }
 
     func authorize(with token: String) {
-        print("token2: [\(token)]")
         vk = VkApiProvider(uid: testUid, with: token)
         vk!.getUserName()
-//        (firstName, lastName) = vk!.getUserName()
+        vk!.requestFriendsGet()
     }
     
     func getFirstName() -> String {

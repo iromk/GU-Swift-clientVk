@@ -17,7 +17,7 @@ class VkApiProvider {
     var uid: String?
     var firstName: String?
     var lastName: String?
-    
+    var friendsUids: JSON?
 
     let apiUrl = "https://api.vk.com"
     let methodFriendsGet = "/method/friends.get"
@@ -31,7 +31,7 @@ class VkApiProvider {
     init(uid: String, with token: String) {
         self.token = token
         self.uid = uid
-        requestUsersGet(uids: nil)
+        requestUsersGet()
     }
     
     func getUserName() -> (String?, String?) {
@@ -53,15 +53,28 @@ class VkApiProvider {
                 self.onResponseFriendsGet(response) }
     }
     
-    func requestUsersGet(uids: String?) {
+    func requestUsersGet(uids: JSON) {
+        var params: Parameters = [
+            "user_ids": uids,
+            "access_token": token!,
+            "v": "5.68"
+        ]
+        
+        Alamofire.request(
+            apiUrl + methodUsersGet,
+            method: .get,
+            parameters: params)
+            .responseData
+            { response in
+                self.onResponseFriendsGet(response) }
+    }
+    
+    func requestUsersGet() {
         var params: Parameters = [
             "user_id": uid!,
             "access_token": token!,
             "v": "5.68"
         ]
-        if let _ = uids {
-            params["user_ids"] = uids
-        }
         
         Alamofire.request(
                     apiUrl + methodUsersGet,
@@ -74,18 +87,33 @@ class VkApiProvider {
     
     func onResponseFriendsGet(_ response: DataResponse<Data>) {
         if let json = response.result.value {
-            print("JSON: \(json)") // serialized json response
+//            print("JSON: \(json)") // serialized json response
         }
         
         do {
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
+//                print("Data: \(utf8Text)") // original server data as UTF8 string
                 jsonUserProfile = try JSON(data: (utf8Text.data(using: .utf8, allowLossyConversion: false))!)
             }
         }
         catch let e {
             print("Error catched \(e)")
         }
+        print("test firendsUids names")
+
+        if let _ = friendsUids { // already have friends uids
+//            print(jsonUserProfile)
+            print("got friends names")
+            print(jsonUserProfile!["response"].arrayValue)
+            var us = UserSession.getInstance()
+            us.addFriends(json: jsonUserProfile!["response"])
+            
+        } else { // get them frist
+            friendsUids = jsonUserProfile!["response"]["items"]
+            print(friendsUids)
+            requestUsersGet(uids: friendsUids!)
+        }
+
 //        lastName = jsonUserProfile!["response"][0]["last_name"].stringValue
 //        firstName = jsonUserProfile!["response"][0]["first_name"].stringValue
     }
@@ -96,12 +124,12 @@ class VkApiProvider {
 //        print("Result: \(response.result)")                         // response serialization result
         
         if let json = response.result.value {
-            print("JSON: \(json)") // serialized json response
+//            print("JSON: \(json)") // serialized json response
         }
         
         do {
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-            print("Data: \(utf8Text)") // original server data as UTF8 string
+//            print("Data: \(utf8Text)") // original server data as UTF8 string
                 jsonUserProfile = try JSON(data: (utf8Text.data(using: .utf8, allowLossyConversion: false))!)
             }
         }

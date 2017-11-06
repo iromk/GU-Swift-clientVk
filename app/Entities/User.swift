@@ -13,7 +13,7 @@ class User {
     var firstName: String?
     var lastName: String?
     
-    var friends: [Friend]?
+    var friends = [String: Friend]()
     var groups: [Group]?
     var ava: Picture?
 

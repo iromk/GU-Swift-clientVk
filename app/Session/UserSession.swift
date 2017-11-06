@@ -7,6 +7,7 @@
 //
 
 import WebKit
+import SwiftyJSON
 
 class UserSession {
     
@@ -54,6 +55,16 @@ class UserSession {
         vk = VkApiProvider(uid: testUid, with: token)
         userObject = User(name: vk!.getUserName() )
         vk!.requestFriendsGet()
+    }
+    
+    func addFriends(json friends: JSON) {
+        
+        for (_, friend):(String,JSON) in friends {
+//            print(friend["id"])
+//            print(friend["last_name"])
+            self.user.friends[friend["id"].stringValue] = Friend(friend["first_name"].stringValue,           friend["last_name"].stringValue)
+        }
+//        print("friends parsed:\n\(self.user.friends)")
     }
     
     func getFirstName() -> String {

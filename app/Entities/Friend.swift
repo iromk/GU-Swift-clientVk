@@ -12,5 +12,13 @@ class Friend {
     
     var firstName: String?
     var LastName: String?
+//    var uid: String?
+    
+    init(_ firstName: String, _ lastName: String ) {
+        self.firstName = firstName
+        self.LastName = lastName
+    }
+    
+    
 
 }

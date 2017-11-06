@@ -19,7 +19,12 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = (userSession.user?.name)! + " friends"
+        navigationItem.title = (userSession.lastName)! + " friends"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("appeared")
+        navigationItem.title = (userSession.lastName)! + " friends"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

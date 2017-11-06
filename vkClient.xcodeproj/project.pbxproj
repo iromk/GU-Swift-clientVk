@@ -33,7 +33,7 @@
 		9C508DF51FA1980E00B83E2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C508DF31FA1980E00B83E2D /* LaunchScreen.storyboard */; };
 		9C508DFD1FA1C51300B83E2D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C508DFC1FA1C51300B83E2D /* Auth.swift */; };
 		9C508DFF1FA1C91500B83E2D /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C508DFE1FA1C91500B83E2D /* UserSession.swift */; };
-		9C8476EA1FAF658E00CCCCD6 /* VKDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8476E91FAF658E00CCCCD6 /* VKDataProvider.swift */; };
+		9C8476EA1FAF658E00CCCCD6 /* VkApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8476E91FAF658E00CCCCD6 /* VkApiProvider.swift */; };
 		C490DAF7E293D5317D188976 /* Pods_vkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D7835000629F420576C0D0 /* Pods_vkClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 		9C508DF61FA1980E00B83E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C508DFC1FA1C51300B83E2D /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		9C508DFE1FA1C91500B83E2D /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
-		9C8476E91FAF658E00CCCCD6 /* VKDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDataProvider.swift; sourceTree = "<group>"; };
+		9C8476E91FAF658E00CCCCD6 /* VkApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkApiProvider.swift; sourceTree = "<group>"; };
 		B3D7835000629F420576C0D0 /* Pods_vkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -163,7 +163,7 @@
 				9C508DF31FA1980E00B83E2D /* LaunchScreen.storyboard */,
 				9C508DF11FA1980E00B83E2D /* Assets.xcassets */,
 				9C508DF61FA1980E00B83E2D /* Info.plist */,
-				9C8476E91FAF658E00CCCCD6 /* VKDataProvider.swift */,
+				9C8476E91FAF658E00CCCCD6 /* VkApiProvider.swift */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -342,7 +342,7 @@
 				9C508DFD1FA1C51300B83E2D /* Auth.swift in Sources */,
 				9C05C9781FAB598700737566 /* OtherGroupsTableViewCell.swift in Sources */,
 				9C05C9761FAB534000737566 /* UserGroupsTableViewCell.swift in Sources */,
-				9C8476EA1FAF658E00CCCCD6 /* VKDataProvider.swift in Sources */,
+				9C8476EA1FAF658E00CCCCD6 /* VkApiProvider.swift in Sources */,
 				9C0B14C41FAACE2600E2BC59 /* FriendsTableViewController.swift in Sources */,
 				9C05C9721FAB4ACC00737566 /* UserGroupsTableViewController.swift in Sources */,
 				9C0B14EC1FAB22FC00E2BC59 /* FriendDetailedCell.swift in Sources */,

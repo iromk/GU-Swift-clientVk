@@ -28,7 +28,11 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("appeared")
         print("table view friends count:\n\(userSession.user.friends.count)")
-        navigationItem.title = (userSession.user.lastName ?? "Noname") + " friends"
+        if userSession.user.friends.count == 0 {
+            navigationItem.title = "still loading friends"
+        } else {
+            navigationItem.title = "\(userSession.user.firstName ?? "Jenny") \(userSession.user.lastName ?? "Doe") friends"
+        }
         tableView.reloadData()
     }
     
@@ -54,7 +58,6 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserFriends", for: indexPath) as! FriendsTableViewCell
         cell.friendName?.text = userSession.user.friends[indexPath.row].fullName
-//        print("deque \(userSession.user.friends[11].firstName)")
 //        cell.friendName?.text = data[indexPath.row]
 //        cell.friendPicture?.image = UIImage(imageLiteralResourceName: "images-" + String(indexPath.row))
         return cell

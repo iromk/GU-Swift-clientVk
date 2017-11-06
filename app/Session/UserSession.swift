@@ -20,7 +20,8 @@ class UserSession {
     var userx: Auth.ArrayProvider.Account?
     
     var vk: VkApiProvider?
-    let testUid = "292290347"
+//    let testUid = "292290347"
+    let testUid = "203067262"
     
     var userObject: User?
     

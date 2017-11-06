@@ -61,12 +61,11 @@ class VkApiProvider {
         ]
         
         Alamofire.request(
-            apiUrl + methodUsersGet,
-            method: .get,
-            parameters: params)
-            .responseData
-            { response in
-                self.onResponseFriendsGet(response) }
+                    apiUrl + methodUsersGet,
+                    method: .get,
+                    parameters: params)
+                .responseData
+                { response in self.onResponseFriendsGet(response) }
     }
     
     func requestUsersGet() {
@@ -81,10 +80,7 @@ class VkApiProvider {
                     method: .get,
                     parameters: params)
                 .responseData
-                    { response in
-                        self.onResponseUsersGet(response)
-                        
-                    }
+                    { response in self.onResponseUsersGet(response) }
         
     }
     
@@ -102,23 +98,19 @@ class VkApiProvider {
         catch let e {
             print("Error catched \(e)")
         }
-        print("test firendsUids names")
 
         if let _ = friendsUids { // already have friends uids
 //            print(jsonUserProfile)
-            print("got friends names")
+            print("got friends names:")
             print(jsonUserProfile!["response"].arrayValue)
             var us = UserSession.getInstance()
             us.addFriends(json: jsonUserProfile!["response"])
             
         } else { // get them frist
             friendsUids = jsonUserProfile!["response"]["items"]
-            print(friendsUids)
+//            print(friendsUids)
             requestUsersGet(uids: friendsUids!)
         }
-
-//        lastName = jsonUserProfile!["response"][0]["last_name"].stringValue
-//        firstName = jsonUserProfile!["response"][0]["first_name"].stringValue
     }
     
     func onResponseUsersGet(_ response: DataResponse<Data>) {

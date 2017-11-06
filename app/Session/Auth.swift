@@ -37,6 +37,7 @@ class Auth {
         
         init(forApp appid: String) {
             authorizeUrl.scheme = "https"
+//            authorizeUrl.host = "vk.com"
             authorizeUrl.host = "oauth.vk.com"
             authorizeUrl.path = "/authorize"
             authorizeUrl.queryItems = [

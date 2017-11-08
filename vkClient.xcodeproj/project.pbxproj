@@ -37,7 +37,7 @@
 		9C9EAE741FB05DAF00A9AF65 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE731FB05DAF00A9AF65 /* User.swift */; };
 		9C9EAE761FB05DB900A9AF65 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE751FB05DB900A9AF65 /* Friend.swift */; };
 		9C9EAE781FB05DC500A9AF65 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE771FB05DC500A9AF65 /* Group.swift */; };
-		9C9EAE7A1FB05DE100A9AF65 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE791FB05DE100A9AF65 /* Picture.swift */; };
+		9C9EAE7A1FB05DE100A9AF65 /* VkImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9EAE791FB05DE100A9AF65 /* VkImage.swift */; };
 		C490DAF7E293D5317D188976 /* Pods_vkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3D7835000629F420576C0D0 /* Pods_vkClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +76,7 @@
 		9C9EAE731FB05DAF00A9AF65 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9C9EAE751FB05DB900A9AF65 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		9C9EAE771FB05DC500A9AF65 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		9C9EAE791FB05DE100A9AF65 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
+		9C9EAE791FB05DE100A9AF65 /* VkImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkImage.swift; sourceTree = "<group>"; };
 		B3D7835000629F420576C0D0 /* Pods_vkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -193,7 +193,7 @@
 				9C9EAE731FB05DAF00A9AF65 /* User.swift */,
 				9C9EAE751FB05DB900A9AF65 /* Friend.swift */,
 				9C9EAE771FB05DC500A9AF65 /* Group.swift */,
-				9C9EAE791FB05DE100A9AF65 /* Picture.swift */,
+				9C9EAE791FB05DE100A9AF65 /* VkImage.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -364,7 +364,7 @@
 				9C508DFD1FA1C51300B83E2D /* Auth.swift in Sources */,
 				9C05C9781FAB598700737566 /* OtherGroupsTableViewCell.swift in Sources */,
 				9C05C9761FAB534000737566 /* UserGroupsTableViewCell.swift in Sources */,
-				9C9EAE7A1FB05DE100A9AF65 /* Picture.swift in Sources */,
+				9C9EAE7A1FB05DE100A9AF65 /* VkImage.swift in Sources */,
 				9C8476EA1FAF658E00CCCCD6 /* VkApiProvider.swift in Sources */,
 				9C0B14C41FAACE2600E2BC59 /* FriendsTableViewController.swift in Sources */,
 				9C9EAE761FB05DB900A9AF65 /* Friend.swift in Sources */,

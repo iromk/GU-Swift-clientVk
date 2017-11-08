@@ -8,19 +8,16 @@
 
 import Foundation
 
-class Friend {
+class Friend : VkPerson {
     
-    var firstName: String?
-    var lastName: String?
-    var uid: String?
-    var fullName: String { get { return "\(firstName ?? "John") \(lastName ?? "Doe")" } }
+    var fullName: String {
+        get {
+            return "\(firstName) \(lastName)"
+        } }
     
-    init(_ uid: String, _ firstName: String, _ lastName: String ) {
-        self.firstName = firstName
-        self.lastName = lastName
+    init(_ uid: String, _ firstName: String, _ lastName: String, _ avatar: VkImage ) {
+        super.init(firstName, lastName)
         self.uid = uid
+        self.avatar = avatar
     }
-    
-    
-
 }

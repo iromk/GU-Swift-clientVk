@@ -7,25 +7,35 @@
 //
 
 import Foundation
+import UIKit
 
-class User {
-    
-    var firstName: String?
-    var lastName: String?
-    
-//    var friends = [String: Friend]()
-    var friends = [Friend]()
-    
-    var groups = [Group]()
-    var ava =  Picture()
+protocol Namable {
 
+    var firstName: String { get set }
+    var lastName: String { get set }
+    
+}
+
+class VkPerson : Namable {
+    var lastName: String
+    var firstName: String
+    var uid: String?
+    
     convenience init(name: (String?, String?)) {
-        self.init(firstName: name.0, lastName: name.1)
+        self.init( name.0, name.1)
     }
+    
+    init(_ firstName: String?, _ lastName: String?) {
+        self.firstName = firstName!
+        self.lastName = lastName!
+    }
+    
+    var avatar: VkImage?
+}
 
-    init(firstName: String?, lastName: String?) {
-        self.firstName = firstName
-        self.lastName = lastName
-    }
+class User : VkPerson {
+    
+    var friends = [Friend]()
+    var groups = [Group]()
     
 }

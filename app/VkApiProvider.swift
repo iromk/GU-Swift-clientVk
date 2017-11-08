@@ -31,12 +31,6 @@ class VkApiProvider {
     init(uid: String, with token: String) {
         self.token = token
         self.uid = uid
-        apiUsersGet(uids: JSON(self.uid))
-            { json in
-                let session = UserSession.getInstance()
-                session.user.firstName = json["response"][0]["first_name"].stringValue
-                session.user.lastName = json["response"][0]["last_name"].stringValue
-            }
     }
     
     func apiFriendsGet(onComplete: @escaping (JSON)->Void) {

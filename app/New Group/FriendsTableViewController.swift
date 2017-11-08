@@ -61,9 +61,18 @@ class FriendsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserFriends", for: indexPath) as! FriendsTableViewCell
-//        cell.uid = userSession.user.friends[indexPath.row].uid // в класс ячейки дбавить поле uid
-        cell.friendName?.text = userSession.user.friends[indexPath.row].fullName
-        //        cell.friendName?.text = data[indexPath.row]
+        cell.uid = userSession.user.friends[indexPath.row].uid // в класс ячейки дбавить поле uid
+        let friend = userSession.user.friends[indexPath.row]
+        cell.friendName?.text = friend.fullName
+        if let ava = friend.avatar?.image {
+            cell.friendPicture?.image = ava
+        } else {
+            friend.avatar?.load {
+                ava in
+                    cell.friendPicture?.image = ava
+                    tableView.reloadData()
+                }
+        }
         //        cell.friendPicture?.image = UIImage(imageLiteralResourceName: "images-" + String(indexPath.row))
         return cell
     }
@@ -73,8 +82,6 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return data.count
-        print("table view friends count:\n\(userSession.user.friends.count)")
         return userSession.user.friends.count
     }
     

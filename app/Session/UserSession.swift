@@ -27,7 +27,7 @@ class UserSession {
     
     var user: User { get {
                 guard let _ = userObject!.lastName else {
-                    var name: (String?, String?) = vk!.getUserName() 
+                    let name: (String?, String?) = vk!.getUserName()
                     userObject?.firstName = name.0
                     userObject?.lastName = name.1
                     return userObject!
@@ -55,14 +55,11 @@ class UserSession {
     func authorize(with token: String) {
         vk = VkApiProvider(uid: testUid, with: token)
         userObject = User(name: vk!.getUserName() )
-        vk!.requestFriendsGet()
     }
     
     func addFriends(json friends: JSON) {
-        
-        for (_, friend):(String,JSON) in friends {
-//            print(friend["id"])
-//            print(friend["last_name"])
+        print("adding friends...")
+        for (_, friend):(String,JSON) in friends["response"] {
             self.user.friends.append(Friend(friend["id"].stringValue,
                                             friend["first_name"].stringValue,
                                             friend["last_name"].stringValue))
@@ -71,12 +68,12 @@ class UserSession {
     }
     
     func getFirstName() -> String {
-        var name: (String, String) = vk!.getUserName() as! (String, String)
+        let name: (String, String) = vk!.getUserName() as! (String, String)
         return name.0
     }
 
     func getLastName() -> String {
-        var name: (String, String) = vk!.getUserName() as! (String, String)
+        let name: (String, String) = vk!.getUserName() as! (String, String)
         return name.1
     }
 
@@ -88,6 +85,4 @@ class UserSession {
         userObject = nil
         return false
     }
-    
-    
 }

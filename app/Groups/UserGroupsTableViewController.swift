@@ -27,7 +27,7 @@ class UserGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = (userSession.user.lastName)! + " groups"
+        navigationItem.title = "\(userSession.user.lastName ?? "someone") groups"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

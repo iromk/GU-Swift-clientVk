@@ -20,25 +20,16 @@ class UserSession {
     var userx: Auth.ArrayProvider.Account?
     
     var vk: VkApiProvider?
-//    let testUid = "292290347"
-    let testUid = "203067262"
+    let testUid = "292290347" // some guy
+//    let testUid = "203067262" // Jennifer Lawrence
     
-    var userObject: User?
+//    var userObject: User?
     
-    var user: User { get {
-                guard let _ = userObject!.lastName else {
-                    let name: (String?, String?) = vk!.getUserName()
-                    userObject?.firstName = name.0
-                    userObject?.lastName = name.1
-                    return userObject!
-                }
-                return userObject!
-        } }
+    var user = User(firstName: "John", lastName: "Doe")
     
-    var state: State { get { return userObject == nil ? .closed : .opened } }
+    var state: State { get { return user == nil ? .closed : .opened } }
     
     init() {
-        userObject = nil
     }
     
     static func getInstance() -> UserSession {
@@ -54,7 +45,6 @@ class UserSession {
 
     func authorize(with token: String) {
         vk = VkApiProvider(uid: testUid, with: token)
-        userObject = User(name: vk!.getUserName() )
     }
     
     func addFriends(json friends: JSON) {
@@ -67,22 +57,11 @@ class UserSession {
         print("friends parsed:\n\(self.user.friends.count)")
     }
     
-    func getFirstName() -> String {
-        let name: (String, String) = vk!.getUserName() as! (String, String)
-        return name.0
-    }
-
-    func getLastName() -> String {
-        let name: (String, String) = vk!.getUserName() as! (String, String)
-        return name.1
-    }
-
     func authorize(login: String, password: String) -> Bool {
         if let result = Auth.ArrayProvider.check(login, with: password) {
             userx = result
             return true
         }
-        userObject = nil
         return false
     }
 }

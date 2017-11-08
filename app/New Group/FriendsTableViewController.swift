@@ -22,9 +22,7 @@ class FriendsTableViewController: UITableViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
-//        print("will appear")
-        activityIndicator.startAnimating()
-        userSession.vk?.apiFriendsGet { json in self.onFriendsRequestComplete(friends: json) }
+        print("will appear")
     }
     
     func onFriendsRequestComplete(friends: JSON) {
@@ -32,21 +30,23 @@ class FriendsTableViewController: UITableViewController {
         userSession.addFriends(json: friends)
         activityIndicator.stopAnimating()
         tableView.reloadData()
+        updateTitle()
     }
-    
+ 
+    func updateTitle() {
+        navigationItem.title = "\(userSession.user.firstName ?? "Jenny") \(userSession.user.lastName ?? "Doe") friends"
+    }
+
     override func viewDidLoad() {
+        print("did load")
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+        userSession.vk?.apiFriendsGet { json in self.onFriendsRequestComplete(friends: json) }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        print("appeared")
-//        print("table view friends count:\(userSession.user.friends.count)")
-        if userSession.user.friends.count == 0 {
-            navigationItem.title = "still loading friends"
-        } else {
-            navigationItem.title = "\(userSession.user.firstName ?? "Jenny") \(userSession.user.lastName ?? "Doe") friends"
-        }
-        tableView.reloadData()
+        print("did appear")
+        updateTitle()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

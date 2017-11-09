@@ -335,6 +335,16 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Friends" id="sEE-C5-28o" userLabel="Friends">
                         <barButtonItem key="backBarButtonItem" title="Friends" id="pEc-G0-Pvz" userLabel="Friends"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="gdY-gD-O2K">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ylf-aA-WmH">
+                                <rect key="frame" x="348" y="7" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Demo"/>
+                                <connections>
+                                    <action selector="onDemoTap:" destination="a1b-a7-RGn" eventType="touchUpInside" id="fHB-5M-4xY"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="0hp-kh-K5C" id="sLk-4U-cxV"/>

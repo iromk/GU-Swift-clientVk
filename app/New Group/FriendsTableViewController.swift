@@ -12,6 +12,21 @@ import Alamofire
 
 class FriendsTableViewController: UITableViewController {
 
+    @IBAction func onDemoTap(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        for (name,uid) in userSession.testUids {
+            alert.addAction(UIAlertAction(title: name, style: .default) { _ in
+                    self.userSession.beginSession(withUid: uid)
+                    self.loadData()
+            })
+        }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in return
+        })
+
+        present(alert, animated: true)
+    }
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let SegueFriendDetails = "FriendDetails"
     
@@ -37,11 +52,15 @@ class FriendsTableViewController: UITableViewController {
         navigationItem.title = "\(userSession.user.firstName ?? "Jenny") \(userSession.user.lastName ?? "Doe") friends"
     }
 
+    func loadData() {
+        activityIndicator.startAnimating()
+        userSession.vk?.apiFriendsGet { json in self.onFriendsRequestComplete(friends: json) }
+    }
+    
     override func viewDidLoad() {
         print("did load")
         super.viewDidLoad()
-        activityIndicator.startAnimating()
-        userSession.vk?.apiFriendsGet { json in self.onFriendsRequestComplete(friends: json) }
+        loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

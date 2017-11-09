@@ -20,15 +20,28 @@ class UserSession {
     var userx: Auth.ArrayProvider.Account?
     
     var vk: VkApiProvider?
-//    let testUid = "292290347" // some guy
-    let testUid = "203067262" // Jennifer Lawrence
     
     var user = User(name: ( "John", "Doe"))
     
+    let testUids = [ "Donald J. Trump":"395319196",
+                     "Some guy":"292290347",
+                     "Jennifer Lawrence":"203067262",
+                     "Olivia Wilde":"215563638"]
+    
+    
+
     var state: State { get { return user == nil ? .closed : .opened } }
     
     init() {
-        user.uid = testUid
+        user.uid = testUids["Olivia Wilde"]
+    }
+    
+    func beginSession(withUid uid: String?) {
+        user.uid = uid!
+        vk!.uid = uid!
+        user.friends.removeAll()
+        user.photos.removeAll()
+        getUserProfile()
     }
     
     static func getInstance() -> UserSession {
@@ -43,7 +56,7 @@ class UserSession {
     }
 
     func authorize(with token: String) {
-        vk = VkApiProvider(uid: testUid, with: token)
+        vk = VkApiProvider(uid: user.uid!, with: token)
         getUserProfile()
     }
     
@@ -54,6 +67,7 @@ class UserSession {
             self.user.firstName = jsonuser["first_name"].stringValue
             self.user.lastName = jsonuser["last_name"].stringValue
             self.user.avatar = VkImage(url: jsonuser["photo"].stringValue)
+            print ("Session: \(self.user.fullName)")
         }
     }
     
@@ -66,3 +80,4 @@ class UserSession {
         return false
     }
 }
+

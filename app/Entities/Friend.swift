@@ -10,11 +10,6 @@ import Foundation
 
 class Friend : VkPerson {
     
-    var fullName: String {
-        get {
-            return "\(firstName) \(lastName)"
-        } }
-    
     init(_ uid: String, _ firstName: String, _ lastName: String, _ avatar: VkImage ) {
         super.init(firstName, lastName)
         self.uid = uid

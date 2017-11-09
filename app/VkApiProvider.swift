@@ -36,6 +36,7 @@ class VkApiProvider {
     func apiFriendsGet(onComplete: @escaping (JSON)->Void) {
         let params: Parameters = [
             "user_id": uid!,
+            "fields": "photo",
             "access_token": token!,
             "v": "5.68"
         ]
@@ -48,7 +49,8 @@ class VkApiProvider {
                 case .success(let value):
                     let json = JSON(value)
                     print("requesting friends...")
-                    self.apiUsersGet(uids: json["response"]["items"], onComplete)
+                    onComplete(json)
+//                    self.apiUsersGet(uids: json["response"]["items"], onComplete)
                 case .failure(let error):
                     print(error)
                 }
@@ -77,6 +79,30 @@ class VkApiProvider {
                         print(error)
                     }
                 }
+    }
+    
+    func apiPhotosGet(owned friend: Friend, _ onComplete: @escaping (JSON)->Void) {
+        let params: Parameters = [
+            "owner_id": friend.uid!,
+            "album_id": "profile",
+            "access_token": token!,
+            "v": "5.68"
+        ]
+        Alamofire.request(
+            apiUrl + methodPhotosGet,
+            method: .get,
+            parameters: params)
+            .validate()
+            .responseJSON
+            { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    onComplete(json)
+                case .failure(let error):
+                    print(error)
+                }
+        }
     }
     
 }

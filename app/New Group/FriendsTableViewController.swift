@@ -27,7 +27,7 @@ class FriendsTableViewController: UITableViewController {
     
     func onFriendsRequestComplete(friends: JSON) {
         print("friend request complete")
-        userSession.addFriends(json: friends)
+        userSession.user.addFriends(json: friends)
         activityIndicator.stopAnimating()
         tableView.reloadData()
         updateTitle()
@@ -51,19 +51,22 @@ class FriendsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueFriendDetails {
-            let dst = segue.destination as! FriendViewController // контроллер коллекции
-            let selection = sender as! FriendsTableViewCell // ячейка куда тапнули
-            dst.name = selection.friendName?.text
-            dst.image = selection.friendPicture?.image
-//            dst.uid = selection.uid // и в контроллере коллекции соответсвенно некая принимающая ячейка
+            let dst = segue.destination as! FriendViewController
+            let selection = sender as! FriendsTableViewCell
+            dst.friend = selection.friend
         }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserFriends", for: indexPath) as! FriendsTableViewCell
-        cell.uid = userSession.user.friends[indexPath.row].uid // в класс ячейки дбавить поле uid
         let friend = userSession.user.friends[indexPath.row]
+        cell.friend = friend
         cell.friendName?.text = friend.fullName
+
+        cell.friendPicture?.layer.cornerRadius = (cell.friendPicture?.frame.size.height)! / 2;
+        cell.friendPicture?.layer.masksToBounds = true;
+        cell.friendPicture?.layer.borderWidth = 0;
+
         if let ava = friend.avatar?.image {
             cell.friendPicture?.image = ava
         } else {

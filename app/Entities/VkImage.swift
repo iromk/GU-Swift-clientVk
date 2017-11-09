@@ -24,7 +24,7 @@ class VkImage {
 
         Alamofire.request(self.url!)
                  .responseData { response in
-                    guard let data = response.result.value else {                        print("Problem loading image"); return }
+                    guard let data = response.result.value else {  print("Problem loading image: (\(self.url!))"); return }
                     self.image = UIImage(data: data)
                     completion(self.image)
                   }

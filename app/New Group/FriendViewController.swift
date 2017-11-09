@@ -12,15 +12,20 @@ private let reuseIdentifier = "FriendCell"
 
 class FriendViewController: UICollectionViewController {
 
-    
-    var name: String?
-    var image: UIImage?
-    
-//    @IBOutlet var collectionView: UICollectionView!
+    let userSession = UserSession.getInstance()
+    var friend: Friend?
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        userSession.vk!.apiPhotosGet(owned: friend!) {
+            json in
+//                print("photos of \(self.friend?.uid!) (json)")
+                self.friend!.addPhotos(json)
+                self.collectionView?.reloadData()
+        }
+//        friend = userSession.user.friends.first { $0.uid == self.uid }
 
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -56,7 +61,7 @@ class FriendViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 42
+        return friend?.photos.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -64,9 +69,18 @@ class FriendViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FriendDetailedCell
     
         // Configure the cell
-        print("*** in collection view")
-        cell.image.image = UIImage(named: "images-\(arc4random_uniform(10))")
-        title = "\(name ?? "friend")'s images"
+        if let image = friend?.photos[indexPath.row].image {
+            cell.image.image = image
+        } else {
+            friend?.photos[indexPath.row].load {
+                image in
+                    cell.image.image = image
+                    collectionView.reloadData()
+            }
+        }
+//        cell.image.image =
+//        cell.image.image = UIImage(named: "images-\(arc4random_uniform(10))")
+        title = "\(friend?.firstName ?? "friend")'s images"
 
         return cell
     }

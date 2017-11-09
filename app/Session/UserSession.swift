@@ -20,8 +20,8 @@ class UserSession {
     var userx: Auth.ArrayProvider.Account?
     
     var vk: VkApiProvider?
-    let testUid = "292290347" // some guy
-//    let testUid = "203067262" // Jennifer Lawrence
+//    let testUid = "292290347" // some guy
+    let testUid = "203067262" // Jennifer Lawrence
     
     var user = User(name: ( "John", "Doe"))
     
@@ -57,18 +57,7 @@ class UserSession {
         }
     }
     
-    func addFriends(json friends: JSON) {
-        print("adding friends...")
-        for (_, friend):(String,JSON) in friends["response"] {
-            self.user.friends.append(
-                Friend(friend["id"].stringValue,
-                       friend["first_name"].stringValue,
-                       friend["last_name"].stringValue,
-                       VkImage(url: friend["photo"].stringValue)))
-        }
-        print("friends parsed:\n\(self.user.friends.count)")
-    }
-    
+       
     func authorize(login: String, password: String) -> Bool {
         if let result = Auth.ArrayProvider.check(login, with: password) {
             userx = result

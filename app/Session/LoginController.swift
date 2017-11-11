@@ -11,6 +11,14 @@ import WebKit
 
 class LoginController: UIViewController {
 
+    @IBAction func onReloginTap(_ sender: Any) {
+        
+        let vk = Auth.VkProvider(forApp: "6247718", relogin: true)
+        vkAuthWebView
+            .load(userSession
+                .requestAuthorizationUrl(through: vk))
+    }
+    
     let SegueAuthOK = "authOK"
     @IBOutlet weak var vkAuthWebView: WKWebView!  {
         didSet{
@@ -39,7 +47,7 @@ class LoginController: UIViewController {
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return true // vk rules
-        
+        /*
         if (inputLogin.text?.isEmpty)! && (inputPassword.text?.isEmpty)! {
             userSession.authorize(login: "morpheus", password: "1")
             return true
@@ -61,7 +69,7 @@ class LoginController: UIViewController {
         } else {
             popAlert(with: "Incorrect credentials given")
             return false
-        }
+        }*/
     }
     
     func popAlert(with text: String) {
@@ -90,9 +98,13 @@ class LoginController: UIViewController {
 
 extension LoginController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
             decisionHandler(.allow)
+//            let vk = Auth.VkProvider(forApp: "6247718")
+//
+//            vkAuthWebView
+//                .load(userSession
+//                    .requestAuthorizationUrl(through: vk))
             return
         }
 

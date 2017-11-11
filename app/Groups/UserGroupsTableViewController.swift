@@ -8,6 +8,7 @@
  
 
 import UIKit
+import SwiftyJSON
 
 class UserGroupsTableViewController: UITableViewController {
 
@@ -24,10 +25,31 @@ class UserGroupsTableViewController: UITableViewController {
         "remarkable friendship"
         ]
     
+    func loadData() {
+        userSession.vk?.apiGroupsGet(uid: userSession.user.uid) { json in
+            self.onGroupsRequestComplete(groups: json)
+        }
+    }
+    
+    func onGroupsRequestComplete(groups: JSON) {
+        userSession.user.addGroups(json: groups)
+        tableView.reloadData()
+    }
+    
+    func updateTitle() {
+        navigationItem.title = "\(userSession.user.firstName ?? "someone") groups"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if userSession.user.groups.count == 0 {
+            loadData()
+        }
+        tableView.reloadData()
+        updateTitle()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.title = "\(userSession.user.lastName ?? "someone") groups"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -49,16 +71,27 @@ class UserGroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return groups.count
+        return userSession.user.groups.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserGroups", for: indexPath) as! UserGroupsTableViewCell
 
-        cell.imageView?.image = UIImage(named: "gr" + String(indexPath.row+1))
-        cell.groupName.text = groups[indexPath.row]
-        
+        let group = userSession.user.groups[indexPath.row]
+
+//        cell.imageView?.image = UIImage(named: "gr" + String(indexPath.row+1))
+        cell.groupName.text = group.name
+        if let ava = group.ava?.image {
+            cell.imageView?.image = ava
+        } else {
+            group.ava?.load {
+                ava in
+                cell.imageView?.image = ava
+                tableView.reloadData()
+            }
+        }
+
         // Configure the cell...
 //        let groupImage = cell.viewWithTag(1) as! UIImageView
 //        groupImage.image = UIImage(named: "images-0")

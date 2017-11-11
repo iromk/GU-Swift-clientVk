@@ -35,9 +35,18 @@ class Auth {
     struct VkProvider {
         var authorizeUrl = URLComponents()
         
+        init(forApp appid: String, relogin: Bool) {
+            makeAuthorizeUrl(appid)
+            authorizeUrl.host = "vk.com"
+            authorizeUrl.path = ""
+        }
+        
         init(forApp appid: String) {
+            makeAuthorizeUrl(appid)
+        }
+        
+        mutating func makeAuthorizeUrl(_ appid: String) {
             authorizeUrl.scheme = "https"
-//            authorizeUrl.host = "vk.com"
             authorizeUrl.host = "oauth.vk.com"
             authorizeUrl.path = "/authorize"
             authorizeUrl.queryItems = [
@@ -52,6 +61,7 @@ class Auth {
         
         
         func requestAuth() -> URLRequest {
+            print("AUTH rl: \(authorizeUrl.url!)")
             return URLRequest(url: authorizeUrl.url!)
         }
     }

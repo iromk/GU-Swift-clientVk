@@ -10,9 +10,5 @@ import Foundation
 
 class Friend : VkPerson {
     
-    init(_ uid: String, _ firstName: String, _ lastName: String, _ avatar: VkImage ) {
-        super.init(firstName, lastName)
-        self.uid = uid
-        self.avatar = avatar
-    }
+
 }

@@ -23,24 +23,25 @@ class UserSession {
     
     var user = User(name: ( "John", "Doe"))
     
-    let testUids = [ "Donald J. Trump":"395319196",
-                     "Some guy":"292290347",
-                     "Jennifer Lawrence":"203067262",
-                     "Olivia Wilde":"215563638"]
+    let testUids: [String: UInt32] = [ "Donald J. Trump": 395319196,
+                     "Some guy":292290347,
+                     "Jennifer Lawrence":203067262,
+                     "Olivia Wilde":215563638]
     
     
 
     var state: State { get { return user == nil ? .closed : .opened } }
     
     init() {
-        user.uid = testUids["Olivia Wilde"]
+        user.uid = testUids["Olivia Wilde"]!
     }
     
-    func beginSession(withUid uid: String?) {
+    func beginSession(withUid uid: UInt32?) {
         user.uid = uid!
         vk!.uid = uid!
         user.friends.removeAll()
         user.photos.removeAll()
+        user.groups.removeAll()
         getUserProfile()
     }
     
@@ -56,12 +57,13 @@ class UserSession {
     }
 
     func authorize(with token: String) {
-        vk = VkApiProvider(uid: user.uid!, with: token)
+        vk = VkApiProvider(uid: user.uid, with: token)
         getUserProfile()
     }
     
     func getUserProfile() {
-        vk!.apiUsersGet(uids: JSON(user.uid!))
+        print("in getUserProfile")
+        vk!.apiUsersGet(uids: JSON(user.uid))
         { json in
             let jsonuser = json["response"][0]
             self.user.firstName = jsonuser["first_name"].stringValue
@@ -71,13 +73,13 @@ class UserSession {
         }
     }
     
-       
-    func authorize(login: String, password: String) -> Bool {
-        if let result = Auth.ArrayProvider.check(login, with: password) {
-            userx = result
-            return true
-        }
-        return false
-    }
+//
+//    func authorize(login: String, password: String) -> Bool {
+//        if let result = Auth.ArrayProvider.check(login, with: password) {
+//            userx = result
+//            return true
+//        }
+//        return false
+//    }
 }
 

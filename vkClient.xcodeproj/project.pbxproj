@@ -131,7 +131,7 @@
 			path = img;
 			sourceTree = "<group>";
 		};
-		9C3C87D91FAEE7A400F824EA /* Friends */ = {
+		9C3652A61FB74E0500B67FC5 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
 				9C0B14EB1FAB22FC00E2BC59 /* FriendDetailedCell.swift */,
@@ -139,8 +139,7 @@
 				9C0B14C31FAACE2600E2BC59 /* FriendsTableViewController.swift */,
 				9C3C87DA1FAEE7D800F824EA /* FriendsTableViewCell.swift */,
 			);
-			name = Friends;
-			path = "New Group";
+			path = Friends;
 			sourceTree = "<group>";
 		};
 		9C508DDE1FA1980E00B83E2D = {
@@ -164,9 +163,9 @@
 		9C508DE91FA1980E00B83E2D /* app */ = {
 			isa = PBXGroup;
 			children = (
+				9C3652A61FB74E0500B67FC5 /* Friends */,
 				9C9EAE721FB05D9D00A9AF65 /* Entities */,
 				9C8476E81FAF20E100CCCCD6 /* Session */,
-				9C3C87D91FAEE7A400F824EA /* Friends */,
 				9C05C9701FAB4A7800737566 /* Groups */,
 				9C0B14D01FAB0D2600E2BC59 /* img */,
 				9C508DEA1FA1980E00B83E2D /* AppDelegate.swift */,

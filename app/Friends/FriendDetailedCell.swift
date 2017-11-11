@@ -10,6 +10,8 @@ import UIKit
 
 class FriendDetailedCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+
+    
+    @IBOutlet weak var image: UIImageView!
     
 }

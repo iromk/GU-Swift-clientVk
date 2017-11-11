@@ -2,7 +2,7 @@
 //  VKDataProvider.swift
 //  vkClient
 //
-//  Created by nnm on 11/5/17.
+//  Created by Roman Syrchin on 11/5/17.
 //  Copyright © 2017 Roman Syrchin. All rights reserved.
 //
 

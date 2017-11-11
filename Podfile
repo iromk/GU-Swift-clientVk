@@ -7,6 +7,6 @@ target 'vkClient' do
   pod 'Alamofire', '~> 4.5'
   pod 'RealmSwift', '~> 3.0'  
   pod 'SwiftyJSON', '4.0.0-alpha.1'
-  # Pods for Homework01
+  # Pods for clientVk
 
 end

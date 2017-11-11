@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Homework01
+//  clientVk
 //
-//  Created by nnm on 10/26/17.
+//  Created by Roman Syrchin on 10/26/17.
 //  Copyright © 2017 Roman Syrchin. All rights reserved.
 //
 

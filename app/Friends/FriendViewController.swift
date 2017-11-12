@@ -17,12 +17,8 @@ class FriendViewController: UICollectionViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        userSession.vk!.apiPhotosGet(owned: friend!) {
-            json in
-//                print("photos of \(self.friend?.uid!) (json)")
-                self.friend!.addPhotos(json)
-                self.collectionView?.reloadData()
-        }
+        print("detailed view didLoad")
+        loadData()
 //        friend = userSession.user.friends.first { $0.uid == self.uid }
 
         
@@ -34,6 +30,19 @@ class FriendViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
         
+    }
+    
+    func loadData() {
+        if friend!.photos.count > 0 {
+            
+        } else {
+            userSession.vk!.apiPhotosGet(owned: friend!) {
+                json in
+                //                print("photos of \(self.friend?.uid!) (json)")
+                self.friend!.addPhotos(json)
+                self.collectionView?.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +84,7 @@ class FriendViewController: UICollectionViewController {
             friend?.photos[indexPath.row].load {
                 image in
                     cell.image.image = image
-                    collectionView.reloadData()
+//                    collectionView.reloadData()
             }
         }
 //        cell.image.image =

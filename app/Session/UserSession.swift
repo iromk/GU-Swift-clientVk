@@ -36,7 +36,7 @@ class UserSession {
     var state: State { get { return user == nil ? .closed : .opened } }
     
     init() {
-        user.uid = testUids["Olivia Wilde"]!
+        user.uid = testUids["Jennifer Lawrence"]!
         do {
             print("\nrealm url: \(Realm.Configuration.defaultConfiguration.fileURL)\n")
 

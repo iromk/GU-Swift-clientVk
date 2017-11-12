@@ -42,10 +42,18 @@ protocol PhotoCollection : class {
 extension PhotoCollection {
 
     func addPhotos(_ photos: JSON) {
-        for (_, photo):(String,JSON) in photos["response"]["items"] {
-            if let imageurl = photo["photo_807"].string { // there could be empty image urls
-                self.photos.append(Photo(url: imageurl, uid: photo["id"].intValue))
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            for (_, photo):(String,JSON) in photos["response"]["items"] {
+                if let imageurl = photo["photo_807"].string { // there could be empty image urls
+                    print("adding photo \(imageurl)")
+                    self.photos.append(Photo(url: imageurl, uid: photo["id"].intValue))
+                }
             }
+            try realm.commitWrite()
+        } catch {
+            print("REALM addPhotos error \(error)")
         }
         //        for p in self.photos {
         //          print("url: [\(p.url!)]")
@@ -66,22 +74,6 @@ class VkPerson : Object, Named, PhotoCollection {
     
     @objc dynamic
     var uid: Vk.Uid = 0
-    
-//    override static func primaryKey() -> String? {
-//        return "uid"
-//    }
-    
-//    func save() {
-//        return
-//        do {
-//            let realm = try Realm()
-//            realm.beginWrite()
-//            realm.add(self)
-//            try realm.commitWrite()
-//        } catch {
-//            print("real error: \(error)")
-//        }
-//    }
     
     convenience init(_ firstName: String?, _ lastName: String?) {
         self.init()
@@ -108,19 +100,21 @@ class VkPerson : Object, Named, PhotoCollection {
         print("adding friends...")
         //        print(friends)
 
-        realm!.beginWrite()
-        for (_, friend):(String,JSON) in friends["response"]["items"] {
-            print("one by one: \(friend["last_name"])")
-            self.friends.append(
-                Friend(friend["id"].intValue,
-                       friend["first_name"].stringValue,
-                       friend["last_name"].stringValue,
-                       Avatar(url: friend["photo"].stringValue, of: friend["id"].intValue)))
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            for (_, friend):(String,JSON) in friends["response"]["items"] {
+                print("one by one: \(friend["last_name"])")
+                self.friends.append(
+                    Friend(friend["id"].intValue,
+                           friend["first_name"].stringValue,
+                           friend["last_name"].stringValue,
+                           Avatar(url: friend["photo"].stringValue, of: friend["id"].intValue)))
+            }
+            print("friends parsed:\n\(self.friends.count)")
+            try realm.commitWrite()
         }
-        print("friends parsed:\n\(self.friends.count)")
-        do { try realm!.commitWrite() }
         catch { print("REALM addFriends error \(error)")}
-//        save()
     }
     
     func addGroups(json groups: JSON) {

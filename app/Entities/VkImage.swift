@@ -83,7 +83,7 @@ class Photo : VkImage {
 
 class Avatar : VkImage {
     
-    enum Size : String { case S = "photo", M = "photo_medium", L = "photo_big" }
+    enum Size : String { case S = "photo"; case M = "photo_medium"; case L = "photo_big" }
     
     convenience init(url: String, of uid: Vk.Uid) {
         self.init(url: url, uid: uid)

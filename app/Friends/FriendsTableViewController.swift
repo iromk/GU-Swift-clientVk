@@ -19,6 +19,7 @@ class FriendsTableViewController: UITableViewController {
             alert.addAction(UIAlertAction(title: name, style: .default) { _ in
                     self.userSession.beginSession(withUid: uid)
                     self.loadData()
+                    self.tableView.reloadData()
             })
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in return

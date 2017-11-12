@@ -37,7 +37,6 @@ class UserSession {
     
     init() {
         user.uid = testUids["Olivia Wilde"]!
-//        user.save()
         do {
             print("\nrealm url: \(Realm.Configuration.defaultConfiguration.fileURL)\n")
 
@@ -75,7 +74,7 @@ class UserSession {
             realm!.add(user)
             try realm!.commitWrite()
         } catch {
-            print("real error: \(error)")
+            print("realm error: \(error)")
         }
     }
 
@@ -92,23 +91,25 @@ class UserSession {
     func getUserProfile() {
         print("in getUserProfile")
         do {
-            let realm = try Realm()
-            if let user1 = realm.object(ofType: User.self, forPrimaryKey: user.uid) as? User {
+            realm = try Realm()
+            if let user1 = realm!.object(ofType: User.self, forPrimaryKey: user.uid) {
                 user = user1
+                print ("REALM Session: \(self.user.fullName)")
+            } else {
+                vk!.apiUsersGet(uids: JSON(user.uid))
+                { json in
+                    let jsonuser = json["response"][0]
+                    self.user.firstName = jsonuser["first_name"].stringValue
+                    self.user.lastName = jsonuser["last_name"].stringValue
+                    self.user.avatar = Avatar(url: jsonuser["photo"].stringValue, of: self.user.uid)
+                    print ("Session: \(self.user.fullName)")
+                    self.save()
+                }
             }
         }catch {
             print("getUserProfile realm error \(error)")
         }
-        vk!.apiUsersGet(uids: JSON(user.uid))
-        { json in
-            let jsonuser = json["response"][0]
-            self.user.firstName = jsonuser["first_name"].stringValue
-            self.user.lastName = jsonuser["last_name"].stringValue
-            self.user.avatar = Avatar(url: jsonuser["photo"].stringValue, of: self.user.uid)
-            print ("Session: \(self.user.fullName)")
-            self.save()
-//            self.user.save()
-        }
+        
     }
     
 //

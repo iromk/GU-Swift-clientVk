@@ -22,9 +22,16 @@ class VkImage : Object, VkEntity {
     @objc dynamic var uid: Vk.Uid = 0
 
 //    @objc
-    var image: UIImage?
-    @objc dynamic
-    var imagePath: String?
+    var image: UIImage? {
+        get {
+            let imageFileName = self.uid
+            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(imageFileName).jpg")
+            guard FileManager.default.fileExists(atPath: fileURL.path) else { return nil }
+            return UIImage(contentsOfFile: fileURL.path)
+        }
+    }
+//    @objc dynamic
+//    var imagePath: String?
 //    let image: UIImage {
 //        get {
 //            return UIImage(contantsFromFile:)
@@ -45,18 +52,16 @@ class VkImage : Object, VkEntity {
     }
     
     func load(completion: @escaping (UIImage?) -> Void) {
-        print("load image requested \(imagePath)")
-        let selfuid = self.uid
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            
-//            let documentsURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(selfuid).jpg")
-            print("fileUrl = \(fileURL)")
-            return (fileURL, [.removePreviousFile])
-        }
-        guard  imagePath == nil else { completion(self.image) ; return }
+        let imageFileName = self.uid
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(imageFileName).jpg")
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in return (fileURL, [.removePreviousFile]) }
+        
+//        print("exists? \(uid) from \(url) to \(fileURL.path)")
+        let exists = FileManager.default.fileExists(atPath: fileURL.path)
+//        print("exists \(exists)")
+        guard FileManager.default.fileExists(atPath: fileURL.path) == false else { completion(self.image) ; return }
 //        guard let _ = image else { completion(self.image) ; return }
-        print("loading image \(uid), \(url)")
+//        print("not exists - loading image \(uid) from \(url) to \(fileURL.path)")
 //        Alamofire.request(self.url!)
         Alamofire.download(self.url!, to: destination)
 //            .responseData { response in
@@ -64,17 +69,25 @@ class VkImage : Object, VkEntity {
 //                    Alamofire.download(urlString).responseData { response in
 //                        print("Temporary URL: \(response.temporaryURL)\n\(NSTemporaryDirectory())")
 //                    }
-                    if let imagePath1 = response.destinationURL?.path {
-                        print("let image = UIImage(contentsOfFile: \(imagePath1))")
-                    }
+                    let exists = FileManager.default.fileExists(atPath: fileURL.path)
+                    print("exists \(exists)")
+//                    if let imagePath1 = response.destinationURL?.path {
+//                        print("let image = UIImage(contentsOfFile: \(imagePath1))")
+//                        print("exists \(FileManager.default.fileExists(atPath: imagePath1))")
+//                    }
 //                    guard let data = response.result.value else {  print("Problem loading image: (\(self.url!))"); return }
 //                    let destination = DownloadRequest.suggestedDownloadDestination(for: NS)
 //                    self.image = UIImage(data: data)
 //                    print("loaded image \(self.uid) from \(self.url), \(self.image)")
-//                    completion(self.image)
+                    completion(self.image)
                   }
     }
 }
+
+/*
+ file:///Users/nnm/Library/Developer/CoreSimulator/Devices/37C9BA3E-6933-4740-AC18-1BF026A58C24/data/Containers/Data/Application/78D6ABB1-0B80-42B1-AFE7-EE673D64F909/tmp/156384838.jpg
+        /Users/nnm/Library/Developer/CoreSimulator/Devices/37C9BA3E-6933-4740-AC18-1BF026A58C24/data/Containers/Data/Application/78D6ABB1-0B80-42B1-AFE7-EE673D64F909/tmp/156384838.jpg)
+ */
     
 
 /*

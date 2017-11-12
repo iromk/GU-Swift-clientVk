@@ -53,8 +53,12 @@ class FriendsTableViewController: UITableViewController {
     }
 
     func loadData() {
-        activityIndicator.startAnimating()
-        userSession.vk?.apiFriendsGet { json in self.onFriendsRequestComplete(friends: json) }
+        if userSession.user.friends.count > 0 {
+            updateTitle()
+        } else {
+            activityIndicator.startAnimating()
+            userSession.vk?.apiFriendsGet { json in self.onFriendsRequestComplete(friends: json) }
+        }
     }
     
     override func viewDidLoad() {
@@ -81,21 +85,22 @@ class FriendsTableViewController: UITableViewController {
         let friend = userSession.user.friends[indexPath.row]
         cell.friend = friend
         cell.friendName?.text = friend.fullName
-        print("cell \(friend.fullName)")
+//        print("cell \(friend.fullName)")
         cell.friendPicture?.layer.cornerRadius = (cell.friendPicture?.frame.size.height)! / 2;
         cell.friendPicture?.layer.masksToBounds = true;
         cell.friendPicture?.layer.borderWidth = 0;
 
-        print("cell \(friend.avatar)")
-        print("cell \(friend.avatar?.image)")
+//        print("cell \(friend.avatar)")
+        print("cell \(indexPath.row)  \(friend.fullName) \(friend.avatar?.image)")
         if let ava = friend.avatar?.image {
             cell.friendPicture?.image = ava
         } else {
+            cell.friendPicture?.image = nil
             print("cell calls friend.avatar.load \(friend.avatar?.url)")
             friend.avatar?.load {
                 ava in
                     cell.friendPicture?.image = ava
-                    tableView.reloadData()
+//                    tableView.reloadData()
                 }
         }
         //        cell.friendPicture?.image = UIImage(imageLiteralResourceName: "images-" + String(indexPath.row))

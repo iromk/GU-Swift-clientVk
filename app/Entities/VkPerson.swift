@@ -10,13 +10,12 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-protocol VkEntity {
-    var uid: Vk.Uid { get set }
+struct Vk {
+    typealias Uid = Int
 }
 
-extension Vk {
-    typealias Uid = Int
-    
+protocol VkEntity {
+    var uid: Vk.Uid { get set }
 }
 
 protocol Named {
@@ -34,7 +33,6 @@ extension Named {
 }
 
 protocol PhotoCollection : class {
-//    var photos: [VkImage] { get set }
     var photos: List<Photo> { get set }
     func addPhotos(_ photos: JSON)
 }
@@ -55,15 +53,11 @@ extension PhotoCollection {
         } catch {
             print("REALM addPhotos error \(error)")
         }
-        //        for p in self.photos {
-        //          print("url: [\(p.url!)]")
-        //        }
-        //        print("total phos: \(self.photos.count)")
     }
     
 }
 
-class VkPerson : Object, Named, PhotoCollection {
+class VkPerson : Object, VkEntity, Named, PhotoCollection {
     
     var photos = List<Photo>()
     
@@ -98,8 +92,6 @@ class VkPerson : Object, Named, PhotoCollection {
     
     func addFriends(json friends: JSON) {
         print("adding friends...")
-        //        print(friends)
-
         do {
             let realm = try Realm()
             realm.beginWrite()

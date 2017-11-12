@@ -11,11 +11,6 @@ import UIKit
 import Alamofire
 import RealmSwift
 
-struct Vk {
-    
-}
-
-
 class VkImage : Object, VkEntity {
     
     @objc dynamic var uid: Vk.Uid = 0

@@ -12,8 +12,14 @@ import RealmSwift
 
 class UserSession {
     
-    enum State {
-        case opened, closed
+    enum State { case opened, closed }
+    var state: State {
+        get {
+            if let token = UserDefaults.standard.string(forKey: "token") {
+                return .opened
+            }
+            return .closed
+        }
     }
     
     var realm: Realm?
@@ -27,27 +33,30 @@ class UserSession {
     var user = User(name: ( "John", "Doe"))
     
     let testUids: [String: Vk.Uid] = [ "Donald J. Trump": 395319196,
-                     "Some guy":292290347,
-                     "Jennifer Lawrence":203067262,
-                     "Olivia Wilde":215563638]
-    
-    
-
-    var state: State { get { return user == nil ? .closed : .opened } }
+                                       "Some guy": 292290347,
+                                       "Jennifer Lawrence": 203067262,
+                                       "Olivia Wilde":215563638]
     
     init() {
         user.uid = testUids["Jennifer Lawrence"]!
         do {
-            print("\nrealm url: \(Realm.Configuration.defaultConfiguration.fileURL)\n")
-
+//            print("\nrealm url: \(Realm.Configuration.defaultConfiguration.fileURL)\n")
             realm = try Realm()
             let realmuser = realm!.objects(User.self).first as? User
-//            let realmuser = realm.object(ofType: User.self, forPrimaryKey: 215563638 )
             let n = realmuser?.lastName
             print("realm user: \(n).")
         } catch {
             print("session init realm error \(error)")
         }
+        if state == .opened {
+            authorize(with: UserDefaults.standard.string(forKey: "token")!)
+        }
+    }
+    
+    func authorize(with token: String) {
+        vk = VkApiProvider(uid: user.uid, with: token)
+        UserDefaults.standard.set(token, forKey: "token")
+        getUserProfile()
     }
     
     func beginSession(withUid uid: Vk.Uid?) {
@@ -83,17 +92,12 @@ class UserSession {
         return vk.requestAuth()
     }
 
-    func authorize(with token: String) {
-        vk = VkApiProvider(uid: user.uid, with: token)
-        getUserProfile()
-    }
-    
     func getUserProfile() {
         print("in getUserProfile")
         do {
             realm = try Realm()
-            if let user1 = realm!.object(ofType: User.self, forPrimaryKey: user.uid) {
-                user = user1
+            if let realmUser = realm!.object(ofType: User.self, forPrimaryKey: user.uid) {
+                self.user = realmUser
                 print ("REALM Session: \(self.user.fullName)")
             } else {
                 vk!.apiUsersGet(uids: JSON(user.uid))

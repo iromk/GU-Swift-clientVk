@@ -37,9 +37,20 @@ class LoginController: UIViewController {
     let userSession: UserSession = UserSession.getInstance()
     
     override func viewDidLoad() {
+        print("login viewDidLoad")
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("login viewDidAppear")
+        super.viewDidAppear(animated)
+        if userSession.state == .opened {
+            print("perform segue")
+            performSegue(withIdentifier: SegueAuthOK, sender: self)
+            return
+        }
         let vk = Auth.VkProvider(forApp: "6247718")
-
+        
         vkAuthWebView
             .load(userSession
                 .requestAuthorizationUrl(through: vk))
@@ -100,11 +111,7 @@ extension LoginController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
             decisionHandler(.allow)
-//            let vk = Auth.VkProvider(forApp: "6247718")
-//
-//            vkAuthWebView
-//                .load(userSession
-//                    .requestAuthorizationUrl(through: vk))
+
             return
         }
 

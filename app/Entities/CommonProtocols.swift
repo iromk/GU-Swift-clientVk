@@ -11,7 +11,12 @@ import SwiftyJSON
 import RealmSwift
 
 protocol VkEntity {
-    var uid: Int32 { get set }
+    var uid: Vk.Uid { get set }
+}
+
+extension Vk {
+    typealias Uid = Int
+    
 }
 
 protocol Named {
@@ -29,7 +34,7 @@ extension Named {
 }
 
 protocol PhotoCollection : class {
-    var photos: [VkImage] { get set }
+    var photos: [Vk.Image] { get set }
     func addPhotos(_ photos: JSON)
 }
 
@@ -38,7 +43,7 @@ extension PhotoCollection {
     func addPhotos(_ photos: JSON) {
         for (_, photo):(String,JSON) in photos["response"]["items"] {
             if let imageurl = photo["photo_807"].string { // there could be empty image urls
-                self.photos.append(VkImage(url: imageurl))
+                self.photos.append(Vk.Image(url: imageurl))
             }
         }
         //        for p in self.photos {
@@ -49,16 +54,32 @@ extension PhotoCollection {
     
 }
 
-class VkPerson : Named, PhotoCollection {
+class VkPerson : Object, Named, PhotoCollection {
     
-    var photos: [VkImage] = []
+    var photos: [Vk.Image] = []
     
-    var lastName: String = ""
-    var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var firstName: String = ""
     
-    var uid: UInt32 = 0
+    @objc dynamic var uid: Vk.Uid = 0
     
-    init(_ firstName: String?, _ lastName: String?) {
+    override static func primaryKey() -> String? {
+        return "uid"
+    }
+    
+    func save() {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.add(self)
+            try realm.commitWrite()
+        } catch {
+            print("real error: \(error)")
+        }
+    }
+    
+    convenience init(_ firstName: String?, _ lastName: String?) {
+        self.init()
         self.firstName = firstName ?? "Anony"
         self.lastName = lastName ?? "Mous"
     }
@@ -67,35 +88,36 @@ class VkPerson : Named, PhotoCollection {
         self.init( name.0, name.1)
     }
     
-    convenience init(_ uid: UInt32, _ firstName: String, _ lastName: String, _ avatar: VkImage ) {
+    convenience init(_ uid: Vk.Uid, _ firstName: String, _ lastName: String, _ avatar: Vk.Image ) {
         self.init(firstName, lastName)
         self.uid = uid
         self.avatar = avatar
     }
-
    
-    var avatar: VkImage?
-    var friends = [Friend]()
+    var avatar: Vk.Image?
+    var friends = List<Friend>() //[Friend]()
     var groups = [Group]()
     
     func addFriends(json friends: JSON) {
         print("adding friends...")
         //        print(friends)
+        return
         for (_, friend):(String,JSON) in friends["response"]["items"] {
             self.friends.append(
-                Friend(friend["id"].uInt32Value,
+                Friend(friend["id"].intValue,
                        friend["first_name"].stringValue,
                        friend["last_name"].stringValue,
-                       VkImage(url: friend["photo"].stringValue)))
+                       Vk.Image(url: friend["photo"].stringValue)))
         }
         print("friends parsed:\n\(self.friends.count)")
+//        save()
     }
     
     func addGroups(json groups: JSON) {
         for (_, group):(String,JSON) in groups["response"]["items"] {
             self.groups.append(
                 Group(group["name"].stringValue,
-                      VkImage(url: group["photo_50"].stringValue)))
+                      Vk.Image(url: group["photo_50"].stringValue)))
         }
         print("groups parsed:\n\(self.groups.count)")
     }

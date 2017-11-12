@@ -14,7 +14,7 @@ import WebKit
 class VkApiProvider {
     
     var token: String?
-    var uid: UInt32?
+    var uid: Vk.Uid?
     var friendsUids: JSON?
 
     let apiUrl = "https://api.vk.com"
@@ -27,7 +27,7 @@ class VkApiProvider {
     
     var jsonUserProfile: JSON?
 
-    init(uid: UInt32, with token: String) {
+    init(uid: Vk.Uid, with token: String) {
         self.token = token
         self.uid = uid
     }
@@ -79,7 +79,7 @@ class VkApiProvider {
         makeRequest(methodPhotosGet, params, onComplete)
     }
     
-    func apiGroupsGet(uid: UInt32, _ onComplete: @escaping (JSON)->Void) {
+    func apiGroupsGet(uid: Vk.Uid, _ onComplete: @escaping (JSON)->Void) {
         let params: Parameters = [
             "user_id": uid,
             "extended": "1",

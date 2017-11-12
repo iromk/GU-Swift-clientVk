@@ -123,8 +123,8 @@
 		9C508DE91FA1980E00B83E2D /* app */ = {
 			isa = PBXGroup;
 			children = (
-				9C3652A61FB74E0500B67FC5 /* Friends */,
 				9C9EAE721FB05D9D00A9AF65 /* Entities */,
+				9C3652A61FB74E0500B67FC5 /* Friends */,
 				9C8476E81FAF20E100CCCCD6 /* Session */,
 				9C05C9701FAB4A7800737566 /* Groups */,
 				9C508DEA1FA1980E00B83E2D /* AppDelegate.swift */,

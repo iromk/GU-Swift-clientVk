@@ -10,9 +10,16 @@ import Foundation
 import UIKit
 import Alamofire
 
-class VkImage : VkEntity {
+
+struct Vk {
     
-    var uid: Int32 = 0
+}
+
+extension Vk {
+
+class Image : VkEntity {
+    
+    var uid: Vk.Uid = 0
 
     var image: UIImage?
     var url: String?
@@ -32,7 +39,8 @@ class VkImage : VkEntity {
                   }
     }
 }
-
+    
+}
 /*
  photo_75
  string     url of the copy with maximum size of 75x75px.
@@ -46,23 +54,23 @@ class VkImage : VkEntity {
  string     url of the copy with maximum size of 1280x1024px.
  photo_2560
  */
-extension VkImage {
+extension Vk.Image {
 
-    convenience init(uid: Int32, url: String) {
+    convenience init(uid: Vk.Uid, url: String) {
         self.init(url: url)
         self.uid = uid
     }
 
 }
 
-class Photo : VkImage {
+class Photo : Vk.Image {
     
     enum Size : String { case xs = "photo_75", s = "photo_130", m = "photo_604",
                               l = "photo_807", xl = " photo_1280", xxl = "photo_2560" }
     
 }
 
-class Avatar : VkImage {
+class Avatar : Vk.Image {
     
     enum Size : String { case s = "photo", m = "photo_medium", l = "photo_big" }
     

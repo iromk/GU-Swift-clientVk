@@ -52,7 +52,7 @@ class VkApiProvider {
     func apiFriendsGet(onComplete: @escaping (JSON)->Void) {
         let params: Parameters = [
             "user_id": uid!,
-            "fields": "photo",
+            "fields": Avatar.Size.S,
             "access_token": token!,
             "v": "5.68"
         ]
@@ -62,7 +62,7 @@ class VkApiProvider {
     func apiUsersGet(uids: JSON, _ onComplete: @escaping (JSON)->Void) {
         let params: Parameters = [
             "user_ids": uids,
-            "fields": "photo",
+            "fields": Avatar.Size.S,
             "access_token": token!,
             "v": "5.68"
         ]

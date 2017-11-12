@@ -32,9 +32,6 @@ class FriendsTableViewController: UITableViewController {
     
     let userSession = UserSession.getInstance()
     
-    // offline test data
-//    let data: [String] = ["Natalie", "James", "Johny", "Maggie", "Sheldon", "Emma", "Jennifer", "Tony", "Dude", "Albert", "Bober"]
-
     
     override func viewWillAppear(_ animated: Bool) {
         print("will appear")
@@ -85,14 +82,13 @@ class FriendsTableViewController: UITableViewController {
         let friend = userSession.user.friends[indexPath.row]
         cell.friend = friend
         cell.friendName?.text = friend.fullName
-//        print("cell \(friend.fullName)")
+        // make avatar in circle
         cell.friendPicture?.layer.cornerRadius = (cell.friendPicture?.frame.size.height)! / 2;
         cell.friendPicture?.layer.masksToBounds = true;
         cell.friendPicture?.layer.borderWidth = 0;
 
-//        print("cell \(friend.avatar)")
-        print("cell \(indexPath.row)  \(friend.fullName) \(friend.avatar?.image)")
         if let ava = friend.avatar?.image {
+            print("cell \(indexPath.row) \(friend.fullName) \(friend.avatar?.image)")
             cell.friendPicture?.image = ava
         } else {
             cell.friendPicture?.image = nil
@@ -100,10 +96,8 @@ class FriendsTableViewController: UITableViewController {
             friend.avatar?.load {
                 ava in
                     cell.friendPicture?.image = ava
-//                    tableView.reloadData()
                 }
         }
-        //        cell.friendPicture?.image = UIImage(imageLiteralResourceName: "images-" + String(indexPath.row))
         return cell
     }
 

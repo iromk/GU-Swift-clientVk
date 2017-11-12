@@ -25,7 +25,6 @@ class LoginController: UIViewController {
             vkAuthWebView.navigationDelegate = self
         }
     }
-//    let vkData = VkApiProvider()
     
     enum InputError: Error {
         case ValueEmpty(explain: String)
@@ -50,7 +49,7 @@ class LoginController: UIViewController {
             return
         }
         let vk = Auth.VkProvider(forApp: "6247718")
-        
+        vkAuthWebView.isHidden = false
         vkAuthWebView
             .load(userSession
                 .requestAuthorizationUrl(through: vk))
@@ -127,7 +126,8 @@ extension LoginController: WKNavigationDelegate {
         }
         
         let token = params["access_token"]
-        userSession.authorize(with: token!)
+        let userId = Int(params["user_id"]!)!
+        userSession.authorize(account: userId, with: token!)
         
         decisionHandler(.cancel)
         

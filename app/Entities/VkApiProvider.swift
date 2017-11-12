@@ -15,7 +15,7 @@ class VkApiProvider {
     
     var token: String?
     var uid: Vk.Uid?
-    var friendsUids: JSON?
+//    var friendsUids: JSON?
 
     let apiUrl = "https://api.vk.com"
     let methodFriendsGet = "/method/friends.get"
@@ -25,7 +25,7 @@ class VkApiProvider {
 
 //    let testUid = "292290347"
     
-    var jsonUserProfile: JSON?
+//    var jsonUserProfile: JSON?
 
     init(uid: Vk.Uid, with token: String) {
         self.token = token

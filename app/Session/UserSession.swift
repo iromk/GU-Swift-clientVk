@@ -49,17 +49,19 @@ class UserSession {
             print("session init realm error \(error)")
         }
         if state == .opened {
-            authorize(with: UserDefaults.standard.string(forKey: "token")!)
+            authorize(account: UserDefaults.standard.integer(forKey: "account"), with: UserDefaults.standard.string(forKey: "token")!)
         }
     }
     
-    func authorize(with token: String) {
+    func authorize(account: Vk.Uid, with token: String) {
         vk = VkApiProvider(uid: user.uid, with: token)
+        UserDefaults.standard.set(account, forKey: "account")
         UserDefaults.standard.set(token, forKey: "token")
         getUserProfile()
     }
     
     func beginSession(withUid uid: Vk.Uid?) {
+        print("beginSession \(uid)")
         user = User()
         user.uid = uid!
         vk!.uid = uid!

@@ -15,7 +15,9 @@ class FriendsTableViewController: UITableViewController {
     @IBAction func onDemoTap(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        for (name,uid) in userSession.testUids {
+        var uids = userSession.testUids
+        uids[">My account"] = UserDefaults.standard.integer(forKey: "account")
+        for (name,uid) in uids.sorted(by: {$0.key < $1.key}) {
             alert.addAction(UIAlertAction(title: name, style: .default) { _ in
                     self.userSession.beginSession(withUid: uid)
                     self.loadData()

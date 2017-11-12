@@ -24,6 +24,14 @@ class VkImage : Object, VkEntity {
 //    @objc
     var image: UIImage?
     @objc dynamic
+    var imagePath: String?
+//    let image: UIImage {
+//        get {
+//            return UIImage(contantsFromFile:)
+//            NSTemporaryDirectory()
+//        }
+//    }
+    @objc dynamic
     var url: String?
     
 //    override static func primaryKey() -> String? {
@@ -37,17 +45,33 @@ class VkImage : Object, VkEntity {
     }
     
     func load(completion: @escaping (UIImage?) -> Void) {
-        print("load image requested \(image)")
-        guard  image == nil else { completion(self.image) ; return }
+        print("load image requested \(imagePath)")
+        let selfuid = self.uid
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            
+//            let documentsURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(selfuid).jpg")
+            print("fileUrl = \(fileURL)")
+            return (fileURL, [.removePreviousFile])
+        }
+        guard  imagePath == nil else { completion(self.image) ; return }
 //        guard let _ = image else { completion(self.image) ; return }
         print("loading image \(uid), \(url)")
-        Alamofire.request(self.url!)
-                 .responseData { response in
-                    guard let data = response.result.value else {  print("Problem loading image: (\(self.url!))"); return }
-                    let destination = DownloadRequest.suggestedDownloadDestination(for: NS)
-                    self.image = UIImage(data: data)
-                    print("loaded image \(self.uid) from \(self.url), \(self.image)")
-                    completion(self.image)
+//        Alamofire.request(self.url!)
+        Alamofire.download(self.url!, to: destination)
+//            .responseData { response in
+                 .response { response in
+//                    Alamofire.download(urlString).responseData { response in
+//                        print("Temporary URL: \(response.temporaryURL)\n\(NSTemporaryDirectory())")
+//                    }
+                    if let imagePath1 = response.destinationURL?.path {
+                        print("let image = UIImage(contentsOfFile: \(imagePath1))")
+                    }
+//                    guard let data = response.result.value else {  print("Problem loading image: (\(self.url!))"); return }
+//                    let destination = DownloadRequest.suggestedDownloadDestination(for: NS)
+//                    self.image = UIImage(data: data)
+//                    print("loaded image \(self.uid) from \(self.url), \(self.image)")
+//                    completion(self.image)
                   }
     }
 }

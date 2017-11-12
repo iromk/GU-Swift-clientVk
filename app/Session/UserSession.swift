@@ -16,6 +16,8 @@ class UserSession {
         case opened, closed
     }
     
+    var realm: Realm?
+    
     static var thisSession: UserSession?
     
     var userx: Auth.ArrayProvider.Account?
@@ -39,8 +41,8 @@ class UserSession {
         do {
             print("\nrealm url: \(Realm.Configuration.defaultConfiguration.fileURL)\n")
 
-            let realm = try Realm()
-            let realmuser = realm.objects(User.self).first as? User
+            realm = try Realm()
+            let realmuser = realm!.objects(User.self).first as? User
 //            let realmuser = realm.object(ofType: User.self, forPrimaryKey: 215563638 )
             let n = realmuser?.lastName
             print("realm user: \(n).")
@@ -66,6 +68,18 @@ class UserSession {
         return thisSession!
     }
     
+    func save() {
+        print("REALM: saving user")
+        do {
+            realm!.beginWrite()
+            realm!.add(user)
+            try realm!.commitWrite()
+        } catch {
+            print("real error: \(error)")
+        }
+    }
+
+    
     func requestAuthorizationUrl(through vk: Auth.VkProvider) -> URLRequest {
         return vk.requestAuth()
     }
@@ -79,20 +93,22 @@ class UserSession {
         print("in getUserProfile")
         do {
             let realm = try Realm()
-            let user1 = realm.object(ofType: User.self, forPrimaryKey: user.uid) as! User
-            user = user1
+            if let user1 = realm.object(ofType: User.self, forPrimaryKey: user.uid) as? User {
+                user = user1
+            }
         }catch {
             print("getUserProfile realm error \(error)")
         }
-//        vk!.apiUsersGet(uids: JSON(user.uid))
-//        { json in
-//            let jsonuser = json["response"][0]
-//            self.user.firstName = jsonuser["first_name"].stringValue
-//            self.user.lastName = jsonuser["last_name"].stringValue
-//            self.user.avatar = Vk.Image(url: jsonuser["photo"].stringValue)
-//            print ("Session: \(self.user.fullName)")
-////            self.user.save()
-//        }
+        vk!.apiUsersGet(uids: JSON(user.uid))
+        { json in
+            let jsonuser = json["response"][0]
+            self.user.firstName = jsonuser["first_name"].stringValue
+            self.user.lastName = jsonuser["last_name"].stringValue
+            self.user.avatar = Avatar(url: jsonuser["photo"].stringValue, of: self.user.uid)
+            print ("Session: \(self.user.fullName)")
+            self.save()
+//            self.user.save()
+        }
     }
     
 //

@@ -9,38 +9,50 @@
 import Foundation
 import UIKit
 import Alamofire
-
+import RealmSwift
 
 struct Vk {
     
 }
 
-extension Vk {
 
-class Image : VkEntity {
+
+class VkImage : Object, VkEntity {
     
-    var uid: Vk.Uid = 0
+    @objc dynamic var uid: Vk.Uid = 0
 
+//    @objc
     var image: UIImage?
+    @objc dynamic
     var url: String?
     
-    init(url: String) {
+//    override static func primaryKey() -> String? {
+//        return "uid"
+//    }
+
+    convenience init(url: String, uid: Vk.Uid) {
+        self.init()
+        self.uid = uid
         self.url = url
     }
     
     func load(completion: @escaping (UIImage?) -> Void) {
-        guard image == nil else { completion(self.image) ; return }
-
+        print("load image requested \(image)")
+        guard  image == nil else { completion(self.image) ; return }
+//        guard let _ = image else { completion(self.image) ; return }
+        print("loading image \(uid), \(url)")
         Alamofire.request(self.url!)
                  .responseData { response in
                     guard let data = response.result.value else {  print("Problem loading image: (\(self.url!))"); return }
+                    let destination = DownloadRequest.suggestedDownloadDestination(for: NS)
                     self.image = UIImage(data: data)
+                    print("loaded image \(self.uid) from \(self.url), \(self.image)")
                     completion(self.image)
                   }
     }
 }
     
-}
+
 /*
  photo_75
  string     url of the copy with maximum size of 75x75px.
@@ -54,24 +66,30 @@ class Image : VkEntity {
  string     url of the copy with maximum size of 1280x1024px.
  photo_2560
  */
-extension Vk.Image {
+extension VkImage {
 
     convenience init(uid: Vk.Uid, url: String) {
-        self.init(url: url)
+        self.init(url: url, uid: uid)
         self.uid = uid
     }
 
 }
 
-class Photo : Vk.Image {
+class Photo : VkImage {
     
     enum Size : String { case xs = "photo_75", s = "photo_130", m = "photo_604",
                               l = "photo_807", xl = " photo_1280", xxl = "photo_2560" }
     
 }
 
-class Avatar : Vk.Image {
+class Avatar : VkImage {
     
     enum Size : String { case s = "photo", m = "photo_medium", l = "photo_big" }
     
+    convenience init(url: String, of uid: Vk.Uid) {
+        self.init(url: url, uid: uid)
+//        self.uid = uid
+//        self.url = url
+    }
+
 }

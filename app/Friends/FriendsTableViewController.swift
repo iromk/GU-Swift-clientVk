@@ -81,14 +81,17 @@ class FriendsTableViewController: UITableViewController {
         let friend = userSession.user.friends[indexPath.row]
         cell.friend = friend
         cell.friendName?.text = friend.fullName
-
+        print("cell \(friend.fullName)")
         cell.friendPicture?.layer.cornerRadius = (cell.friendPicture?.frame.size.height)! / 2;
         cell.friendPicture?.layer.masksToBounds = true;
         cell.friendPicture?.layer.borderWidth = 0;
 
+        print("cell \(friend.avatar)")
+        print("cell \(friend.avatar?.image)")
         if let ava = friend.avatar?.image {
             cell.friendPicture?.image = ava
         } else {
+            print("cell calls friend.avatar.load \(friend.avatar?.url)")
             friend.avatar?.load {
                 ava in
                     cell.friendPicture?.image = ava
@@ -104,6 +107,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("userSession.user.friends.count \(userSession.user.friends.count)")
         return userSession.user.friends.count
     }
     

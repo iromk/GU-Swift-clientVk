@@ -11,9 +11,9 @@ import Foundation
 class Group {
     
     var name: String?
-    var ava: Vk.Image?
+    var ava: VkImage?
     
-    init(_ name: String, _ imageurl: Vk.Image) {
+    init(_ name: String, _ imageurl: VkImage) {
         self.ava = imageurl
         self.name = name
     }

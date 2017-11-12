@@ -14,6 +14,9 @@ import RealmSwift
 
 class User : VkPerson {
     
+        override static func primaryKey() -> String? {
+            return "uid"
+        }
     
 }
 

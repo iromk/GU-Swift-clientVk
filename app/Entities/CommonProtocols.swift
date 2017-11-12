@@ -34,7 +34,8 @@ extension Named {
 }
 
 protocol PhotoCollection : class {
-    var photos: [Vk.Image] { get set }
+//    var photos: [VkImage] { get set }
+    var photos: List<Photo> { get set }
     func addPhotos(_ photos: JSON)
 }
 
@@ -43,7 +44,7 @@ extension PhotoCollection {
     func addPhotos(_ photos: JSON) {
         for (_, photo):(String,JSON) in photos["response"]["items"] {
             if let imageurl = photo["photo_807"].string { // there could be empty image urls
-                self.photos.append(Vk.Image(url: imageurl))
+                self.photos.append(Photo(url: imageurl, uid: photo["id"].intValue))
             }
         }
         //        for p in self.photos {
@@ -56,27 +57,31 @@ extension PhotoCollection {
 
 class VkPerson : Object, Named, PhotoCollection {
     
-    var photos: [Vk.Image] = []
+    var photos = List<Photo>()
     
-    @objc dynamic var lastName: String = ""
-    @objc dynamic var firstName: String = ""
+    @objc dynamic
+    var lastName: String = ""
+    @objc dynamic
+    var firstName: String = ""
     
-    @objc dynamic var uid: Vk.Uid = 0
+    @objc dynamic
+    var uid: Vk.Uid = 0
     
-    override static func primaryKey() -> String? {
-        return "uid"
-    }
+//    override static func primaryKey() -> String? {
+//        return "uid"
+//    }
     
-    func save() {
-        do {
-            let realm = try Realm()
-            realm.beginWrite()
-            realm.add(self)
-            try realm.commitWrite()
-        } catch {
-            print("real error: \(error)")
-        }
-    }
+//    func save() {
+//        return
+//        do {
+//            let realm = try Realm()
+//            realm.beginWrite()
+//            realm.add(self)
+//            try realm.commitWrite()
+//        } catch {
+//            print("real error: \(error)")
+//        }
+//    }
     
     convenience init(_ firstName: String?, _ lastName: String?) {
         self.init()
@@ -88,28 +93,33 @@ class VkPerson : Object, Named, PhotoCollection {
         self.init( name.0, name.1)
     }
     
-    convenience init(_ uid: Vk.Uid, _ firstName: String, _ lastName: String, _ avatar: Vk.Image ) {
+    convenience init(_ uid: Vk.Uid, _ firstName: String, _ lastName: String, _ avatar: Avatar ) {
         self.init(firstName, lastName)
         self.uid = uid
         self.avatar = avatar
     }
    
-    var avatar: Vk.Image?
-    var friends = List<Friend>() //[Friend]()
+    @objc dynamic
+    var avatar: Avatar?
+    var friends = List<Friend>()
     var groups = [Group]()
     
     func addFriends(json friends: JSON) {
         print("adding friends...")
         //        print(friends)
-        return
+
+        realm!.beginWrite()
         for (_, friend):(String,JSON) in friends["response"]["items"] {
+            print("one by one: \(friend["last_name"])")
             self.friends.append(
                 Friend(friend["id"].intValue,
                        friend["first_name"].stringValue,
                        friend["last_name"].stringValue,
-                       Vk.Image(url: friend["photo"].stringValue)))
+                       Avatar(url: friend["photo"].stringValue, of: friend["id"].intValue)))
         }
         print("friends parsed:\n\(self.friends.count)")
+        do { try realm!.commitWrite() }
+        catch { print("REALM addFriends error \(error)")}
 //        save()
     }
     
@@ -117,7 +127,7 @@ class VkPerson : Object, Named, PhotoCollection {
         for (_, group):(String,JSON) in groups["response"]["items"] {
             self.groups.append(
                 Group(group["name"].stringValue,
-                      Vk.Image(url: group["photo_50"].stringValue)))
+                      VkImage(url: group["photo_50"].stringValue, uid: group["id"].intValue)))
         }
         print("groups parsed:\n\(self.groups.count)")
     }

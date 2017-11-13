@@ -36,15 +36,15 @@ class LoginController: UIViewController {
     let userSession: UserSession = UserSession.getInstance()
     
     override func viewDidLoad() {
-        print("login viewDidLoad")
+//        print("login viewDidLoad")
         super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("login viewDidAppear")
+//        print("login viewDidAppear")
         super.viewDidAppear(animated)
         if userSession.state == .opened {
-            print("perform segue")
+//            print("perform segue")
             performSegue(withIdentifier: SegueAuthOK, sender: self)
             return
         }

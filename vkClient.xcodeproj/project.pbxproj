@@ -123,7 +123,7 @@
 		9C508DE91FA1980E00B83E2D /* app */ = {
 			isa = PBXGroup;
 			children = (
-				9C9EAE721FB05D9D00A9AF65 /* Entities */,
+				9C9EAE721FB05D9D00A9AF65 /* VkSwifter */,
 				9C3652A61FB74E0500B67FC5 /* Friends */,
 				9C8476E81FAF20E100CCCCD6 /* Session */,
 				9C05C9701FAB4A7800737566 /* Groups */,
@@ -146,7 +146,7 @@
 			path = Session;
 			sourceTree = "<group>";
 		};
-		9C9EAE721FB05D9D00A9AF65 /* Entities */ = {
+		9C9EAE721FB05D9D00A9AF65 /* VkSwifter */ = {
 			isa = PBXGroup;
 			children = (
 				9C8476E91FAF658E00CCCCD6 /* VkApiProvider.swift */,
@@ -156,7 +156,7 @@
 				9C9EAE751FB05DB900A9AF65 /* Friend.swift */,
 				9C9EAE771FB05DC500A9AF65 /* Group.swift */,
 			);
-			path = Entities;
+			path = VkSwifter;
 			sourceTree = "<group>";
 		};
 		DE08CE9F574875CB83D58734 /* Pods */ = {

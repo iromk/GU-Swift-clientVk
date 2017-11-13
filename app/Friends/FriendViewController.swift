@@ -17,7 +17,7 @@ class FriendViewController: UICollectionViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("detailed view didLoad")
+//        print("detailed view didLoad")
         loadData()
 //        friend = userSession.user.friends.first { $0.uid == self.uid }
 

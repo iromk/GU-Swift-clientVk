@@ -1,6 +1,9 @@
 //
 //  Image.swift
-//  vkClient
+//  Defines classes:
+//    - VkImage
+//    - Avatar : VkImage
+//    - Photo : VkImage
 //
 //  Created by Roman Syrchin on 11/6/17.
 //  Copyright © 2017 Roman Syrchin. All rights reserved.
@@ -15,12 +18,16 @@ class VkImage : Object, VkEntity {
     
     @objc dynamic var uid: Vk.Uid = 0
 
+    func fileUrl() -> URL {
+        let imageFileName = self.uid
+        return FileManager.default.temporaryDirectory.appendingPathComponent("\(imageFileName).jpg")
+    }
+    
     var image: UIImage? {
         get {
-            let imageFileName = self.uid
-            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(imageFileName).jpg")
-            guard FileManager.default.fileExists(atPath: fileURL.path) else { return nil }
-            return UIImage(contentsOfFile: fileURL.path)
+            let filePath = fileUrl().path
+            guard FileManager.default.fileExists(atPath: filePath) else { return nil }
+            return UIImage(contentsOfFile: filePath)
         }
     }
 
@@ -34,11 +41,10 @@ class VkImage : Object, VkEntity {
     }
     
     func load(completion: @escaping (UIImage?) -> Void) {
-        let imageFileName = self.uid
-        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(imageFileName).jpg")
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in return (fileURL, [.removePreviousFile]) }
+        let fileUrl = self.fileUrl()
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in return (fileUrl, [.removePreviousFile]) }
 
-        let exists = FileManager.default.fileExists(atPath: fileURL.path)
+        let exists = FileManager.default.fileExists(atPath: fileUrl.path)
         guard exists == false else { completion(self.image) ; return }
         Alamofire.download(self.url!, to: destination)
                  .response { response in
@@ -82,8 +88,6 @@ class Avatar : VkImage {
     
     convenience init(url: String, of uid: Vk.Uid) {
         self.init(url: url, uid: uid)
-//        self.uid = uid
-//        self.url = url
     }
 
 }

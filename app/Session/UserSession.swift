@@ -40,7 +40,7 @@ class UserSession {
     init() {
         user.uid = testUids["Jennifer Lawrence"]!
         do {
-//            print("\nrealm url: \(Realm.Configuration.defaultConfiguration.fileURL)\n")
+            print("\n\n*** REALM URL:\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n***\n\n")
             realm = try Realm()
             let realmuser = realm!.objects(User.self).first as? User
             let n = realmuser?.lastName
@@ -61,7 +61,7 @@ class UserSession {
     }
     
     func beginSession(withUid uid: Vk.Uid?) {
-        print("beginSession \(uid)")
+        print("begin session \(uid)")
         user = User()
         user.uid = uid!
         vk!.uid = uid!
@@ -95,7 +95,6 @@ class UserSession {
     }
 
     func getUserProfile() {
-        print("in getUserProfile")
         do {
             realm = try Realm()
             if let realmUser = realm!.object(ofType: User.self, forPrimaryKey: user.uid) {

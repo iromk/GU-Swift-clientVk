@@ -16,7 +16,7 @@ class FriendsTableViewController: UITableViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         var uids = userSession.testUids
-        uids[">My account"] = UserDefaults.standard.integer(forKey: "account")
+        uids["> My account <"] = UserDefaults.standard.integer(forKey: "account")
         for (name,uid) in uids.sorted(by: {$0.key < $1.key}) {
             alert.addAction(UIAlertAction(title: name, style: .default) { _ in
                     self.userSession.beginSession(withUid: uid)
@@ -37,11 +37,11 @@ class FriendsTableViewController: UITableViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        print("will appear")
+//        print("will appear")
     }
     
     func onFriendsRequestComplete(friends: JSON) {
-        print("friend request complete")
+        print("friend request completed")
         userSession.user.addFriends(json: friends)
         activityIndicator.stopAnimating()
         tableView.reloadData()
@@ -62,13 +62,13 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        print("did load")
+//        print("did load")
         super.viewDidLoad()
         loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("did appear")
+//        print("did appear")
         updateTitle()
     }
     
@@ -91,11 +91,11 @@ class FriendsTableViewController: UITableViewController {
         cell.friendPicture?.layer.borderWidth = 0;
 
         if let ava = friend.avatar?.image {
-            print("cell \(indexPath.row) \(friend.fullName) \(friend.avatar?.image)")
+//            print("cell \(indexPath.row) \(friend.fullName) \(friend.avatar?.image)")
             cell.friendPicture?.image = ava
         } else {
             cell.friendPicture?.image = nil
-            print("cell calls friend.avatar.load \(friend.avatar?.url)")
+//            print("cell calls friend.avatar.load \(friend.avatar?.url)")
             friend.avatar?.load {
                 ava in
                     cell.friendPicture?.image = ava

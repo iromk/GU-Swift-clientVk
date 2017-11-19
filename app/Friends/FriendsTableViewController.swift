@@ -16,6 +16,7 @@ class FriendsTableViewController: UITableViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         var uids = userSession.testUids
+        let sender = self
         uids["> My account <"] = UserDefaults.standard.integer(forKey: "account")
         for (name,uid) in uids.sorted(by: {$0.key < $1.key}) {
             alert.addAction(UIAlertAction(title: name, style: .default) { _ in
@@ -24,6 +25,11 @@ class FriendsTableViewController: UITableViewController {
                     self.tableView.reloadData()
             })
         }
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { _ in
+//            self.userSession.state = .closed
+            self.userSession.deleteWebViewData {
+            self.performSegue(withIdentifier: "Logout", sender: self)}
+        })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in return
         })
 

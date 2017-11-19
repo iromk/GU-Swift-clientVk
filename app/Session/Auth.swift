@@ -47,9 +47,11 @@ class Auth {
         
         mutating func makeAuthorizeUrl(_ appid: String) {
             authorizeUrl.scheme = "https"
+//            authorizeUrl.host = "vk.com"
             authorizeUrl.host = "oauth.vk.com"
             authorizeUrl.path = "/authorize"
             authorizeUrl.queryItems = [
+//                URLQueryItem(name: "act", value: "logout"),
                 URLQueryItem(name: "client_id", value: appid),
                 URLQueryItem(name: "display", value: "mobile"),
                 URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),

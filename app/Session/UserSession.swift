@@ -20,6 +20,13 @@ class UserSession {
             }
             return .closed
         }
+        set {
+            if newValue == .closed {
+                UserDefaults.standard.removeObject(forKey: "token")
+                UserDefaults.standard.removeObject(forKey: "account")
+                self.state = newValue
+            }
+        }
     }
     
     var realm: Realm?
@@ -53,6 +60,16 @@ class UserSession {
         }
     }
     
+    func deleteWebViewData(completion: @escaping () -> Void) {
+        let dateFrom = NSDate(timeIntervalSince1970: 0)
+        let websiteDataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
+        
+        WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom as Date, completionHandler: {() -> Void in
+            UserDefaults.standard.synchronize()
+            completion()
+        })
+    }
+
     func authorize(account: Vk.Uid, with token: String) {
         vk = VkApiProvider(uid: user.uid, with: token)
         UserDefaults.standard.set(account, forKey: "account")

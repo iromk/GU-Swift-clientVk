@@ -58,6 +58,7 @@ extension PhotoCollection {
 
     func addPhotos(_ photos: JSON) {
         print("adding photos...")
+        print(photos)
         do {
             let realm = try Realm()
             realm.beginWrite()

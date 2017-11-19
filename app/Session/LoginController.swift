@@ -19,6 +19,7 @@ class LoginController: UIViewController {
                 .requestAuthorizationUrl(through: vk))
     }
     
+
     let SegueAuthOK = "authOK"
     @IBOutlet weak var vkAuthWebView: WKWebView!  {
         didSet{
@@ -36,12 +37,12 @@ class LoginController: UIViewController {
     let userSession: UserSession = UserSession.getInstance()
     
     override func viewDidLoad() {
-//        print("login viewDidLoad")
+        print("login viewDidLoad")
         super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        print("login viewDidAppear")
+        print("login viewDidAppear")
         super.viewDidAppear(animated)
         if userSession.state == .opened {
 //            print("perform segue")
@@ -82,6 +83,23 @@ class LoginController: UIViewController {
         }*/
     }
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){
+        print("login reset here")
+//        userSession.state = .closed
+//        URLCache.shared.removeAllCachedResponses()
+//        HTTPURLResponse.coo
+        
+//        URLCache.shared.removeAllCachedResponses()
+//        URLCache.shared.diskCapacity = 0
+//        URLCache.shared.memoryCapacity = 0
+//
+//        if let cookies = HTTPCookieStorage.shared.cookies {
+//            for cookie in cookies {
+//                HTTPCookieStorage.shared.deleteCookie(cookie)
+//            }
+//        }
+    }
+    
     func popAlert(with text: String) {
         let alert = UIAlertController(title: "Login error", message: text, preferredStyle: .alert)
         let action = UIAlertAction(title: "Try again", style: .cancel, handler: nil)
@@ -107,12 +125,14 @@ class LoginController: UIViewController {
 }
 
 extension LoginController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
             decisionHandler(.allow)
 
             return
         }
+        
 
         let params = fragment
             .components(separatedBy: "&")

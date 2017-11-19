@@ -26,10 +26,10 @@ class FriendsTableViewController: UITableViewController {
             })
         }
         alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { _ in
-//            self.userSession.state = .closed
+            self.userSession.state = .closed
             
             self.userSession.deleteWebViewData {
-            self.performSegue(withIdentifier: "Logout", sender: self)}
+                self.performSegue(withIdentifier: "Logout", sender: self)}
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in return
         })

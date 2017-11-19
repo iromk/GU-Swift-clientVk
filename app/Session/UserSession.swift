@@ -20,11 +20,12 @@ class UserSession {
             }
             return .closed
         }
-        set {
+        set(newValue) {
             if newValue == .closed {
                 UserDefaults.standard.removeObject(forKey: "token")
                 UserDefaults.standard.removeObject(forKey: "account")
-                self.state = newValue
+            }
+            if newValue == .opened {
             }
         }
     }
@@ -66,6 +67,7 @@ class UserSession {
         
         WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom as Date, completionHandler: {() -> Void in
             UserDefaults.standard.synchronize()
+            
             completion()
         })
     }

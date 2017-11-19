@@ -27,6 +27,7 @@ class FriendsTableViewController: UITableViewController {
         }
         alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { _ in
 //            self.userSession.state = .closed
+            
             self.userSession.deleteWebViewData {
             self.performSegue(withIdentifier: "Logout", sender: self)}
         })

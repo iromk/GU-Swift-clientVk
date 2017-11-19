@@ -85,19 +85,23 @@ class LoginController: UIViewController {
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){
         print("login reset here")
-//        userSession.state = .closed
-//        URLCache.shared.removeAllCachedResponses()
+        userSession.state = .closed
+        URLCache.shared.removeAllCachedResponses()
 //        HTTPURLResponse.coo
         
-//        URLCache.shared.removeAllCachedResponses()
-//        URLCache.shared.diskCapacity = 0
-//        URLCache.shared.memoryCapacity = 0
-//
-//        if let cookies = HTTPCookieStorage.shared.cookies {
-//            for cookie in cookies {
-//                HTTPCookieStorage.shared.deleteCookie(cookie)
-//            }
-//        }
+        URLCache.shared.removeAllCachedResponses()
+        URLCache.shared.diskCapacity = 0
+        URLCache.shared.memoryCapacity = 0
+        print("login reset progress")
+
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                print("eating coockie")
+
+                HTTPCookieStorage.shared.deleteCookie(cookie)
+            }
+        }
+        print("login reset done")
     }
     
     func popAlert(with text: String) {

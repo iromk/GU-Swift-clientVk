@@ -63,9 +63,12 @@ extension PhotoCollection {
             let realm = try Realm()
             realm.beginWrite()
             for (_, photo):(String,JSON) in photos["response"]["items"] {
-                if let imageurl = photo["photo_807"].string { // there could be empty image urls
-//                    print("adding photo \(imageurl)")
-                    self.photos.append(Photo(url: imageurl, uid: photo["id"].intValue))
+                for imageSize in [ Photo.Size.L, Photo.Size.M, Photo.Size.XL, Photo.Size.XXL, Photo.Size.S, Photo.Size.XS ] {
+                    if let imageurl = photo[imageSize.rawValue].string { // there could be empty image urls
+    //                    print("adding photo \(imageurl)")
+                        self.photos.append(Photo(url: imageurl, uid: photo["id"].intValue, imageSize.rawValue))
+                        break
+                    }
                 }
             }
             try realm.commitWrite()

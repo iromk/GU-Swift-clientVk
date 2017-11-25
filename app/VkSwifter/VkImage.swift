@@ -80,6 +80,8 @@ class Photo : VkImage {
     enum Size : String { case XS = "photo_75", S = "photo_130", M = "photo_604",
                               L = "photo_807", XL = " photo_1280", XXL = "photo_2560" }
     
+    @objc
+    var size: String?
 }
 
 class Avatar : VkImage {
